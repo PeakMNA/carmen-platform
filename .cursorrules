@@ -1,0 +1,482 @@
+# Instructions
+
+During your interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `.cursorrules` file so you will not make the same mistake again. 
+
+You should also use the `.cursorrules` file as a Scratchpad to organize your thoughts. Especially when you receive a new task, you should first review the content of the Scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
+[X] Task 1
+[ ] Task 2
+
+Also update the progress of the task in the Scratchpad when you finish a subtask.
+Especially when you finished a milestone, it will help to improve your depth of task accomplishment to use the Scratchpad to reflect and plan.
+The goal is to help you maintain a big picture as well as the progress of the task. Always refer to the Scratchpad when you plan the next step.
+
+# Tools
+
+Note all the tools are in python. So in the case you need to do batch processing, you can always consult the python files and write your own script.
+
+## Screenshot Verification
+
+The screenshot verification workflow allows you to capture screenshots of web pages and verify their appearance using LLMs. The following tools are available:
+
+1. Screenshot Capture:
+```bash
+venv/bin/python tools/screenshot_utils.py URL [--output OUTPUT] [--width WIDTH] [--height HEIGHT]
+```
+
+2. LLM Verification with Images:
+```bash
+venv/bin/python tools/llm_api.py --prompt "Your verification question" --provider {openai|anthropic} --image path/to/screenshot.png
+```
+
+Example workflow:
+```python
+from screenshot_utils import take_screenshot_sync
+from llm_api import query_llm
+
+# Take a screenshot
+
+screenshot_path = take_screenshot_sync('https://example.com', 'screenshot.png')
+
+# Verify with LLM
+
+response = query_llm(
+    "What is the background color and title of this webpage?",
+    provider="openai",  # or "anthropic"
+    image_path=screenshot_path
+)
+print(response)
+```
+
+## LLM
+
+You always have an LLM at your side to help you with the task. For simple tasks, you could invoke the LLM by running the following command:
+```
+venv/bin/python ./tools/llm_api.py --prompt "What is the capital of France?" --provider "anthropic"
+```
+
+The LLM API supports multiple providers:
+- OpenAI (default, model: gpt-4o)
+- Azure OpenAI (model: configured via AZURE_OPENAI_MODEL_DEPLOYMENT in .env file, defaults to gpt-4o-ms)
+- DeepSeek (model: deepseek-chat)
+- Anthropic (model: claude-3-sonnet-20240229)
+- Gemini (model: gemini-pro)
+- Local LLM (model: Qwen/Qwen2.5-32B-Instruct-AWQ)
+
+But usually it's a better idea to check the content of the file and use the APIs in the `tools/llm_api.py` file to invoke the LLM if needed.
+
+## Web browser
+
+You could use the `tools/web_scraper.py` file to scrape the web.
+```
+venv/bin/python ./tools/web_scraper.py --max-concurrent 3 URL1 URL2 URL3
+```
+This will output the content of the web pages.
+
+## Search engine
+
+You could use the `tools/search_engine.py` file to search the web.
+```
+venv/bin/python ./tools/search_engine.py "your search keywords"
+```
+This will output the search results in the following format:
+```
+URL: https://example.com
+Title: This is the title of the search result
+Snippet: This is a snippet of the search result
+```
+If needed, you can further use the `web_scraper.py` file to scrape the web page content.
+
+# Lessons
+
+## User Specified Lessons
+
+- You have a python venv in ./venv. Use it.
+- Include info useful for debugging in the program output.
+- Read the file before you try to edit it.
+- Due to Cursor's limit, when you use `git` and `gh` and need to submit a multiline commit message, first write the message in a file, and then use `git commit -F <filename>` or similar command to commit. And then remove the file. Include "[Cursor] " in the commit message and PR title.
+
+## Cursor learned
+
+- For search results, ensure proper handling of different character encodings (UTF-8) for international queries
+- Add debug information to stderr while keeping the main output clean in stdout for better pipeline integration
+- When using seaborn styles in matplotlib, use 'seaborn-v0_8' instead of 'seaborn' as the style name due to recent seaborn version changes
+- use 'npx shadcn@latest add' to add a component
+
+# Scratchpad
+
+## Current Task: Plan Carmen Platform Implementation
+
+### System Components
+1. Frontend
+   - Next.js 15 App Router
+   - TailwindCSS + Shadcn/ui
+   - React Query + Zustand
+
+2. Backend
+   - Next.js API Routes
+   - tRPC for type-safe APIs
+   - PostgreSQL + Prisma
+   - NextAuth.js for authentication
+
+3. Infrastructure
+   - Vercel deployment
+   - GitHub Actions CI/CD
+   - Monitoring & logging
+
+### Implementation Phases
+
+#### Phase 1: Core Platform (8 weeks)
+[X] Project Setup
+    [X] Repository initialization
+    [X] Development environment
+    [X] CI/CD pipeline
+
+[ ] Authentication System (2 weeks)
+    [ ] Email invitation flow
+    [ ] OAuth integration
+    [ ] MFA setup
+    [ ] Session management
+
+[ ] Multi-tenant Foundation (3 weeks)
+    [ ] Database schema design
+    [ ] Tenant isolation
+    [ ] Resource management
+    [ ] Access control
+
+[ ] Basic UI (3 weeks)
+    [ ] Dashboard layout
+    [ ] Navigation structure
+    [ ] Core components
+    [ ] Responsive design
+
+#### Phase 2: Management Features (6 weeks)
+[ ] User Management (2 weeks)
+    [ ] User CRUD operations
+    [ ] Role management
+    [ ] Permission system
+    [ ] Team organization
+
+[ ] Monitoring System (2 weeks)
+    [ ] Health checks
+    [ ] Alert system
+    [ ] Performance metrics
+    [ ] Logging infrastructure
+
+[ ] Support System (2 weeks)
+    [ ] Ticket management
+    [ ] Knowledge base
+    [ ] Documentation system
+    [ ] Support workflows
+
+#### Phase 3: Integration & Enhancement (6 weeks)
+[ ] API Development (2 weeks)
+    [ ] RESTful endpoints
+    [ ] Webhook system
+    [ ] API documentation
+    [ ] Rate limiting
+
+[ ] Advanced Features (2 weeks)
+    [ ] Advanced analytics
+    [ ] Custom reporting
+    [ ] Audit logging
+    [ ] Compliance tools
+
+[ ] Platform Optimization (2 weeks)
+    [ ] Performance tuning
+    [ ] Security hardening
+    [ ] Scalability testing
+    [ ] Documentation completion
+
+### Technical Requirements
+
+#### Database Schema
+- Tenants
+- Users
+- Roles
+- Permissions
+- Teams
+- Audit Logs
+- Support Tickets
+- Knowledge Base
+
+#### API Endpoints
+- Authentication
+- User Management
+- Tenant Management
+- System Monitoring
+- Support System
+- Integration Points
+
+#### UI Components
+- Authentication forms
+- Dashboard layouts
+- Management interfaces
+- Monitoring displays
+- Support tools
+
+### UI Components - Tenant Management
+
+#### Tenant Dashboard (/admin/tenants)
+1. Tenant Overview
+   - Tenant list with status
+   - Resource usage metrics
+   - Active users count
+   - Health status indicators
+   - Quick action buttons
+
+2. Tenant Creation Wizard
+   - Step 1: Basic Information
+     - Tenant name
+     - Description
+     - Business unit
+     - Contact information
+   - Step 2: Resource Allocation
+     - Storage limits
+     - User quotas
+     - API rate limits
+   - Step 3: Security Settings
+     - Authentication methods
+     - IP restrictions
+     - Security policies
+   - Step 4: Feature Configuration
+     - Enabled features
+     - Integration options
+     - Custom settings
+
+3. Tenant Management Interface
+   - Configuration
+     - General settings
+     - Custom domain setup
+     - Branding options
+     - Notification preferences
+   - Resource Management
+     - Storage usage
+     - User license allocation
+     - API usage monitoring
+     - Resource scaling controls
+   - Access Control
+     - User management
+     - Role assignments
+     - Permission settings
+     - Access policies
+   - Monitoring
+     - Health metrics
+     - Performance data
+     - Usage statistics
+     - Audit logs
+
+4. Tenant Support Tools
+   - Issue tracking
+   - Support ticket management
+   - Knowledge base access
+   - Documentation center
+
+#### Implementation Priority
+[ ] Phase 1: Core Tenant Management (2 weeks)
+    [ ] Tenant list view
+    [ ] Basic creation form
+    [ ] Essential settings
+    [ ] Resource monitoring
+
+[ ] Phase 2: Advanced Features (2 weeks)
+    [ ] Full creation wizard
+    [ ] Detailed configuration
+    [ ] Resource management
+    [ ] Access control
+
+[ ] Phase 3: Support & Monitoring (2 weeks)
+    [ ] Support integration
+    [ ] Advanced monitoring
+    [ ] Audit capabilities
+    [ ] Custom reporting
+
+#### UI Components Required
+1. List Views
+   - TenantList
+   - UserList
+   - ResourceList
+   - AuditList
+
+2. Forms
+   - TenantCreationForm
+   - TenantSettingsForm
+   - ResourceAllocationForm
+   - SecurityConfigForm
+
+3. Dashboards
+   - TenantOverviewDashboard
+   - ResourceUsageDashboard
+   - MonitoringDashboard
+   - AuditDashboard
+
+4. Modals & Wizards
+   - TenantCreationWizard
+   - ResourceAllocationModal
+   - SecuritySettingsModal
+   - FeatureConfigModal
+
+5. Charts & Metrics
+   - ResourceUsageChart
+   - UserActivityChart
+   - PerformanceMetrics
+   - HealthStatusIndicators
+
+#### Technical Considerations
+- Implement proper loading states
+- Handle error scenarios gracefully
+- Ensure responsive design
+- Maintain consistent styling
+- Support dark/light modes
+- Implement proper validation
+- Add proper tooltips and help text
+- Ensure accessibility compliance
+
+### Next Steps
+1. [ ] Create detailed technical specifications
+2. [ ] Set up development environment
+3. [ ] Initialize project structure
+4. [ ] Begin Phase 1 implementation
+
+### Key Considerations
+- Ensure proper tenant isolation
+- Implement robust security measures
+- Design for scalability
+- Maintain comprehensive documentation
+- Follow best practices for each technology
+
+# Lessons
+
+- Keep documentation modular and avoid redundancy
+- Separate concerns in documentation (requirements vs structure vs flows)
+- Maintain clear boundaries between different documentation types
+
+### User Roles & Responsibilities
+
+#### Platform Administrator
+**Role**: Overall platform management and configuration
+**Tasks**:
+- Manage tenant provisioning and configuration
+- Monitor platform health and performance
+- Configure global security policies
+- Manage platform-wide settings
+- Handle system upgrades and maintenance
+- Monitor resource utilization
+- Generate platform-wide reports
+
+#### Tenant Administrator
+**Role**: Manage specific tenant environment
+**Tasks**:
+- Configure tenant-specific settings
+- Manage users within the tenant
+- Assign roles and permissions
+- Monitor tenant resource usage
+- Handle tenant-specific configurations
+- Generate tenant-level reports
+- Manage tenant security settings
+
+#### Business Unit Manager
+**Role**: Manage specific business unit within a tenant
+**Tasks**:
+- Manage team members
+- Assign team roles
+- Monitor unit performance
+- Handle resource allocation
+- Generate unit-level reports
+- Configure unit-specific settings
+- Manage access controls
+
+#### Support Manager
+**Role**: Oversee support operations
+**Tasks**:
+- Manage support ticket workflow
+- Assign tickets to support staff
+- Monitor support performance
+- Maintain knowledge base
+- Generate support reports
+- Handle escalations
+- Train support staff
+
+#### Support Staff
+**Role**: Handle day-to-day support operations
+**Tasks**:
+- Process support tickets
+- Update ticket status
+- Document solutions
+- Contribute to knowledge base
+- Assist users with issues
+- Follow up on resolved tickets
+- Escalate complex issues
+
+#### Regular User
+**Role**: Use platform features within assigned permissions
+**Tasks**:
+- Access assigned resources
+- Submit support tickets
+- Use platform features
+- Update profile settings
+- View relevant reports
+- Follow security policies
+- Access documentation
+
+#### Security Officer
+**Role**: Ensure platform security and compliance
+**Tasks**:
+- Monitor security alerts
+- Review audit logs
+- Enforce security policies
+- Handle security incidents
+- Conduct security audits
+- Generate compliance reports
+- Update security documentation
+
+#### Integration Developer
+**Role**: Handle platform integrations
+**Tasks**:
+- Manage API integrations
+- Configure webhooks
+- Monitor integration health
+- Handle integration issues
+- Document integration points
+- Optimize performance
+- Maintain integration security
+
+### Access Level Hierarchy
+1. Platform Level
+   - Platform Administrators
+   - Security Officers
+
+2. Tenant Level
+   - Tenant Administrators
+   - Business Unit Managers
+
+3. Operational Level
+   - Support Managers
+   - Support Staff
+   - Integration Developers
+
+4. User Level
+   - Regular Users
+   - Limited Access Users
+
+### Permission Inheritance
+- Platform Admin → Full Access
+- Tenant Admin → Tenant-wide Access
+- Business Unit Manager → Unit-wide Access
+- Support Manager → Support System Access
+- Regular User → Feature-based Access
+
+### Role Assignment Rules
+1. Role Separation
+   - Clear separation of duties
+   - No conflicting permissions
+   - Documented role assignments
+
+2. Access Control
+   - Least privilege principle
+   - Time-based access
+   - Location-based restrictions
+
+3. Audit Requirements
+   - Role changes logged
+   - Permission updates tracked
+   - Access attempts recorded

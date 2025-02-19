@@ -1,0 +1,35 @@
+carmen-platform/
+├── src/
+│   ├── app/
+│   │   ├── (auth)/
+│   │   │   ├── login/
+│   │   │   ├── register/
+│   │   │   └── layout.tsx
+│   │   ├── (dashboard)/
+│   │   │   ├── admin/
+│   │   │   │   ├── tenants/
+│   │   │   │   ├── users/
+│   │   │   │   └── settings/
+│   │   │   ├── dashboard/
+│   │   │   └── layout.tsx
+│   │   ├── api/
+│   │   │   └── trpc/[trpc]/route.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── ui/
+│   │   ├── forms/
+│   │   ├── layouts/
+│   │   └── shared/
+│   ├── lib/
+│   │   ├── prisma.ts
+│   │   ├── trpc.ts
+│   │   └── auth.ts
+│   ├── server/
+│   │   ├── routers/
+│   │   └── trpc.ts
+│   └── types/
+├── prisma/
+│   └── schema.prisma
+├── public/
+└── package.json 

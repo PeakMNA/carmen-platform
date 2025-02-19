@@ -74,10 +74,13 @@
   - Integration testing
   - Snapshot testing
 
-- **Cypress**
+- **Playwright**
   - End-to-end testing
-  - Component testing
-  - Visual regression testing
+  - Cross-browser testing
+  - Mobile device emulation
+  - API testing
+  - Visual comparisons
+  - Auto-wait capabilities
 
 ## Development Tools
 - **ESLint**
