@@ -15,16 +15,17 @@ import {
 } from "@/components/ui/select"
 import { Plus, FileText } from "lucide-react"
 
-interface Hotel {
+interface Cluster {
   id: string
   name: string
-  brand: string
+  region: string
+  hotelCount: number
 }
 
-const hotels: Hotel[] = [
-  { id: "h-1", name: "Grand Hotel Downtown", brand: "Luxury Collection" },
-  { id: "h-2", name: "Business Tower Hotel", brand: "Business Hotels" },
-  { id: "h-3", name: "Beachfront Resort & Spa", brand: "Resort Collection" },
+const clusters: Cluster[] = [
+  { id: "c-1", name: "Luxury Hotels Group", region: "Asia Pacific", hotelCount: 12 },
+  { id: "c-2", name: "Premium Resorts Collection", region: "Southeast Asia", hotelCount: 8 },
+  { id: "c-3", name: "Business Hotels Network", region: "East Asia", hotelCount: 15 },
 ]
 
 const standardReports = [
@@ -62,7 +63,7 @@ const standardReports = [
 
 export function ReportAssignmentDialog() {
   const [reportType, setReportType] = useState<"standard" | "custom">("standard")
-  const [selectedHotel, setSelectedHotel] = useState("")
+  const [selectedCluster, setSelectedCluster] = useState("")
   const [selectedReport, setSelectedReport] = useState("")
   const [customReportDetails, setCustomReportDetails] = useState("")
   const [schedule, setSchedule] = useState("monthly")
@@ -77,19 +78,19 @@ export function ReportAssignmentDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Assign Report to Hotel</DialogTitle>
+          <DialogTitle>Assign Report to Hotel Group</DialogTitle>
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label>Hotel</Label>
-            <Select value={selectedHotel} onValueChange={setSelectedHotel}>
+            <Label>Hotel Group</Label>
+            <Select value={selectedCluster} onValueChange={setSelectedCluster}>
               <SelectTrigger>
-                <SelectValue placeholder="Select hotel..." />
+                <SelectValue placeholder="Select hotel group..." />
               </SelectTrigger>
               <SelectContent>
-                {hotels.map((hotel) => (
-                  <SelectItem key={hotel.id} value={hotel.id}>
-                    {hotel.name} ({hotel.brand})
+                {clusters.map((cluster) => (
+                  <SelectItem key={cluster.id} value={cluster.id}>
+                    {cluster.name} ({cluster.region} • {cluster.hotelCount} hotels)
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -124,6 +125,9 @@ export function ReportAssignmentDialog() {
                   ))}
                 </SelectContent>
               </Select>
+              <p className="text-sm text-muted-foreground">
+                This report will be assigned to all hotels in the selected group
+              </p>
             </div>
           ) : (
             <div className="space-y-2">
@@ -177,7 +181,7 @@ export function ReportAssignmentDialog() {
           <Button onClick={() => {
             // TODO: Handle report assignment
             console.log({
-              hotelId: selectedHotel,
+              clusterId: selectedCluster,
               reportType,
               reportId: selectedReport,
               customDetails: customReportDetails,
@@ -191,4 +195,4 @@ export function ReportAssignmentDialog() {
       </DialogContent>
     </Dialog>
   )
-} 
+}

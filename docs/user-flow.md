@@ -12,63 +12,95 @@
 4. If MFA enabled:
    - Enters TOTP code or
    - Responds to SMS verification
-5. Redirects to dashboard
+5. Redirects to role-specific dashboard:
+   - Platform Admin: Global dashboard
+   - Cluster Admin: Cluster dashboard
+   - Hotel Manager: Hotel dashboard
+   - Staff: Department dashboard
 
 ### Sign Up
 1. User selects "Create Account"
 2. Chooses account type:
-   - Individual
-   - Organization Admin
+   - Platform Admin
+   - Cluster Admin
+   - Hotel Manager
 3. Provides required information:
    - Email
    - Password
-   - Organization details (if admin)
+   - Organization details
 4. Verifies email address
 5. Sets up MFA (optional)
-6. Completes organization setup (if admin)
+6. Completes organization setup
 
-## Tenant Administration
+## Platform Administration
 
-### Tenant Creation
-1. Admin accesses tenant management
-2. Selects "Create New Tenant"
-3. Configures tenant settings:
-   - Name and details
-   - Resource allocation
-   - Security policies
-4. Sets up initial admin user
-5. Configures tenant-specific features
+### Hotel Group (Cluster) Management
+1. Platform Admin accesses cluster management
+2. Performs cluster operations:
+   - Creates new clusters
+   - Modifies existing clusters
+   - Manages cluster settings
+3. Assigns Cluster Admins
+4. Configures cluster-wide policies
+5. Reviews cluster performance
 
 ### User Management
-1. Tenant admin accesses user management
-2. Performs user operations:
+1. Admin accesses user management (scope based on role):
+   - Platform Admin: All users
+   - Cluster Admin: Cluster users
+   - Hotel Manager: Hotel staff
+2. Filters users by:
+   - Platform role
+   - Hotel group (if applicable)
+   - Status
+3. Performs user operations:
    - Creates new users
    - Modifies existing users
+   - Manages roles
    - Deactivates accounts
-3. Assigns roles and permissions
 4. Sets up team structures
 5. Configures access policies
 
 ## Report Management
 
+### Template Library Management
+1. Platform Admin accesses template library
+2. Manages templates:
+   - Creates new templates
+   - Modifies existing templates
+   - Archives old templates
+3. Configures template settings:
+   - Categories
+   - Data points
+   - Generation rules
+4. Reviews template usage
+
 ### Template Assignment
-1. Admin navigates to report management
-2. Selects report templates
-3. Assigns to business units
-4. Configures access permissions
-5. Sets usage limitations
+1. Cluster Admin accesses report management
+2. Views available templates
+3. Selects templates for assignment
+4. Chooses target cluster
+5. Configures assignment settings:
+   - Schedule
+   - Distribution rules
+   - Access permissions
+6. Reviews and confirms assignment
 
 ### Report Generation
 1. User accesses reports section
-2. Selects report template
-3. Configures parameters
-4. Generates report
-5. Views or downloads output
+2. Views assigned templates
+3. Selects report template
+4. Configures parameters:
+   - Time period
+   - Data points
+   - Format options
+5. Generates report
+6. Views or downloads output
 
 ## Security Operations
 
 ### Access Control
-1. Admin accesses security settings
+1. Admin accesses security settings (scope based on role)
 2. Configures:
    - Password policies
    - MFA requirements
@@ -83,8 +115,12 @@
    - User activities
    - System changes
    - Security events
-3. Generates audit reports
-4. Investigates anomalies
+3. Filters by:
+   - Cluster
+   - Hotel
+   - User role
+4. Generates audit reports
+5. Investigates anomalies
 
 ## Notification Management
 
@@ -95,7 +131,10 @@
    - Email alerts
    - SMS notifications
    - Webhooks
-3. Sets up notification rules
+3. Sets up notification rules:
+   - By role
+   - By cluster
+   - By event type
 4. Tests notification delivery
 
 ### User Preferences
@@ -104,7 +143,10 @@
    - Preferred channels
    - Notification frequency
    - Priority levels
-3. Sets up filters
+3. Sets up filters:
+   - By report type
+   - By event type
+   - By urgency
 4. Tests settings
 
 ## Integration Workflows
@@ -116,8 +158,9 @@
    - Rate limits
    - Access scopes
    - Webhook endpoints
-4. Tests integration
-5. Monitors usage
+4. Sets up cluster-specific integrations
+5. Tests integration
+6. Monitors usage
 
 ### Webhook Management
 1. Admin accesses webhook configuration
@@ -126,5 +169,41 @@
    - Event triggers
    - Payload format
    - Retry policies
-4. Tests webhook delivery
-5. Monitors performance
+4. Configures cluster-specific webhooks
+5. Tests webhook delivery
+6. Monitors performance
+
+## Cluster Operations
+
+### Cluster Setup
+1. Platform Admin creates new cluster
+2. Configures basic settings:
+   - Cluster name
+   - Region
+   - Contact information
+3. Sets up initial structure:
+   - Departments
+   - Roles
+   - Permissions
+4. Assigns Cluster Admin
+5. Reviews and activates
+
+### Hotel Management
+1. Cluster Admin accesses hotel management
+2. Performs hotel operations:
+   - Adds new hotels
+   - Updates hotel information
+   - Manages hotel settings
+3. Assigns Hotel Managers
+4. Configures hotel-specific settings
+5. Reviews hotel performance
+
+### Staff Management
+1. Hotel Manager accesses staff management
+2. Manages staff members:
+   - Adds new staff
+   - Updates roles
+   - Manages permissions
+3. Assigns departments
+4. Sets up schedules
+5. Reviews staff performance

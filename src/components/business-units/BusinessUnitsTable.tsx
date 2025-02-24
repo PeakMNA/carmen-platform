@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useParams, useRouter } from "next/navigation"
 import {
   Table,
   TableBody,
@@ -18,57 +18,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { BusinessUnitDetails } from "./BusinessUnitDetails"
+import { BusinessUnit } from '@/types/tenant'
 
-const businessUnits = [
-  {
-    id: "bu-1234",
-    name: "Grand Hotel Downtown",
-    head: "Sarah Johnson",
-    teams: "8",
-    members: "350",
-    brand: "Luxury Collection",
-    status: "active",
-    location: "New York",
-    rooms: "280",
-  },
-  {
-    id: "bu-1235",
-    name: "Business Tower Hotel",
-    head: "Michael Chen",
-    teams: "6",
-    members: "220",
-    brand: "Business Hotels",
-    status: "active",
-    location: "Chicago",
-    rooms: "180",
-  },
-  {
-    id: "bu-1236",
-    name: "Beachfront Resort & Spa",
-    head: "Maria Garcia",
-    teams: "10",
-    members: "400",
-    brand: "Resort Collection",
-    status: "active",
-    location: "Bali",
-    rooms: "320",
-  },
-  {
-    id: "bu-1237",
-    name: "City Center Hotel",
-    head: "James Wilson",
-    teams: "7",
-    members: "280",
-    brand: "Business Hotels",
-    status: "active",
-    location: "London",
-    rooms: "240",
-  },
-]
+interface BusinessUnitsTableProps {
+  businessUnits: BusinessUnit[]
+}
 
-export function BusinessUnitsTable() {
-  const [selectedUnit, setSelectedUnit] = useState<typeof businessUnits[0] | null>(null)
+export function BusinessUnitsTable({ businessUnits }: BusinessUnitsTableProps) {
+  const { clusterId } = useParams()
+  const router = useRouter()
 
   return (
     <>
@@ -83,7 +41,7 @@ export function BusinessUnitsTable() {
               <TableHead>Brand</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Location</TableHead>
-              <TableHead>Rooms</TableHead>
+              <TableHead>Database</TableHead>
               <TableHead className="w-[50px]"></TableHead>
             </TableRow>
           </TableHeader>
@@ -100,18 +58,18 @@ export function BusinessUnitsTable() {
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-muted-foreground" />
-                    {unit.teams}
+                    {unit.details.teams}
                   </div>
                 </TableCell>
-                <TableCell>{unit.members}</TableCell>
+                <TableCell>{unit.details.members}</TableCell>
                 <TableCell>{unit.brand}</TableCell>
                 <TableCell>
                   <Badge variant="default">
                     {unit.status}
                   </Badge>
                 </TableCell>
-                <TableCell>{unit.location}</TableCell>
-                <TableCell>{unit.rooms}</TableCell>
+                <TableCell>{`${unit.location.city}, ${unit.location.country}`}</TableCell>
+                <TableCell>{unit.configuration.database.name}</TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -120,13 +78,40 @@ export function BusinessUnitsTable() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => setSelectedUnit(unit)}>
+                      <DropdownMenuItem onClick={() => 
+                        router.push(`/admin/clusters/${clusterId}/business-units/${unit.id}`)
+                      }>
                         View Details
                       </DropdownMenuItem>
-                      <DropdownMenuItem>Edit Unit</DropdownMenuItem>
-                      <DropdownMenuItem>Manage Teams</DropdownMenuItem>
-                      <DropdownMenuItem>Assign Tenants</DropdownMenuItem>
-                      <DropdownMenuItem className="text-destructive">
+                      <DropdownMenuItem onClick={() => 
+                        router.push(`/admin/clusters/${clusterId}/business-units/${unit.id}/edit`)
+                      }>
+                        Edit Unit
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => 
+                        router.push(`/admin/clusters/${clusterId}/business-units/${unit.id}`)
+                      }>
+                        Manage Users & Roles
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => 
+                        router.push(`/admin/business-units/${unit.id}/templates`)
+                      }>
+                        Templates
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => 
+                        router.push(`/admin/reports?businessUnitId=${unit.id}`)
+                      }>
+                        Reports
+                      </DropdownMenuItem>
+                      <DropdownMenuItem 
+                        className="text-destructive"
+                        onClick={() => {
+                          if (confirm('Are you sure you want to deactivate this business unit?')) {
+                            // TODO: Implement deactivation
+                            console.log('Deactivating unit:', unit.id)
+                          }
+                        }}
+                      >
                         Deactivate Unit
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -138,13 +123,6 @@ export function BusinessUnitsTable() {
         </Table>
       </div>
 
-      {selectedUnit && (
-        <BusinessUnitDetails
-          unit={selectedUnit}
-          isOpen={!!selectedUnit}
-          onClose={() => setSelectedUnit(null)}
-        />
-      )}
     </>
   )
-} 
+}

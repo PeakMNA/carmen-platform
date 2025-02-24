@@ -3,46 +3,50 @@
 ## Platform Administration
 
 ### Multi-tenant Application Management
-**Scenario**: Managing multiple supply chain application instances
+**Scenario**: Managing multiple hotel groups and their applications
 - **Actions**:
-  - Deploy isolated application environments
-  - Configure tenant-specific settings
-  - Monitor application health
+  - Create and configure hotel groups
+  - Set up cluster-specific environments
+  - Configure integration settings
+  - Monitor cluster health
 - **Outcomes**:
-  - Isolated application instances
-  - Centralized management
-  - Efficient resource utilization
+  - Organized hotel group structure
+  - Proper cluster isolation
+  - Efficient resource management
 
 ### Application Lifecycle Management
-**Scenario**: Managing supply chain application updates
+**Scenario**: Managing platform updates and maintenance
 - **Actions**:
-  - Schedule maintenance windows
-  - Deploy application updates
-  - Roll back problematic changes
+  - Schedule maintenance windows by cluster
+  - Deploy updates with minimal disruption
+  - Monitor update progress
+  - Handle rollbacks if needed
 - **Outcomes**:
-  - Minimal disruption
-  - Version consistency
-  - Reliable deployments
+  - Smooth update process
+  - Minimal service disruption
+  - Reliable platform operation
 
 ## Support Operations
 
 ### Issue Resolution
-**Scenario**: Resolving application issues across tenants
+**Scenario**: Resolving hotel group issues
 - **Actions**:
-  - Monitor error reports
-  - Diagnose application problems
-  - Apply fixes across instances
+  - Monitor cluster error reports
+  - Diagnose cluster-specific problems
+  - Apply fixes to affected groups
+  - Track resolution status
 - **Outcomes**:
   - Quick problem resolution
-  - Consistent fixes
-  - Improved application stability
+  - Targeted fixes
+  - Improved stability
 
 ### Support Team Management
-**Scenario**: Coordinating support across regions
+**Scenario**: Managing support across hotel groups
 - **Actions**:
-  - Assign support territories
-  - Manage escalation paths
-  - Track support metrics
+  - Assign support teams to clusters
+  - Set up escalation paths
+  - Monitor response times
+  - Track resolution rates
 - **Outcomes**:
   - Efficient support coverage
   - Clear responsibility lines
@@ -51,364 +55,291 @@
 ## Platform Security
 
 ### Access Control Management
-**Scenario**: Managing platform access across organizations
+**Scenario**: Managing role-based access
 - **Actions**:
-  - Define access roles
-  - Set up authentication rules
-  - Configure SSO integration
+  - Configure platform roles
+  - Set up cluster-specific permissions
+  - Manage hotel-level access
+  - Monitor access patterns
 - **Outcomes**:
   - Secure access control
-  - Simplified authentication
-  - Compliance adherence
+  - Clear role hierarchy
+  - Proper isolation
 
 ### Security Monitoring
-**Scenario**: Platform-wide security oversight
+**Scenario**: Monitoring platform security
 - **Actions**:
-  - Monitor security events
-  - Track access patterns
-  - Investigate anomalies
+  - Track security events by cluster
+  - Monitor user activities
+  - Detect suspicious patterns
+  - Generate security reports
 - **Outcomes**:
   - Enhanced security
-  - Threat prevention
-  - Audit compliance
+  - Early threat detection
+  - Proper compliance
 
-## Application Integration
+## Report Management
 
-### API Management
-**Scenario**: Managing application integrations
+### Template Library Management
+**Scenario**: Managing global report templates
 - **Actions**:
-  - Monitor API usage
-  - Manage rate limits
-  - Track integration health
+  - Create standard templates
+  - Define data points and categories
+  - Set validation rules
+  - Configure generation settings
 - **Outcomes**:
-  - Reliable integrations
-  - Controlled access
-  - Performance optimization
+  - Standardized reporting
+  - Clear data structure
+  - Efficient generation
 
-### Data Synchronization
-**Scenario**: Managing cross-application data flow
+### Template Assignment
+**Scenario**: Assigning templates to clusters
 - **Actions**:
-  - Monitor data sync status
-  - Resolve sync conflicts
-  - Optimize sync performance
+  - Select target clusters
+  - Configure template settings
+  - Set generation schedules
+  - Monitor usage
 - **Outcomes**:
-  - Data consistency
-  - Reliable synchronization
-  - Efficient data flow
+  - Proper distribution
+  - Clear assignments
+  - Efficient tracking
+
+### Report Generation
+**Scenario**: Generating cluster reports
+- **Actions**:
+  - Select report templates
+  - Input required data
+  - Generate reports
+  - Distribute to stakeholders
+- **Outcomes**:
+  - Accurate reports
+  - Timely delivery
+  - Proper distribution
+
+## User Management
+
+### Platform Role Management
+**Scenario**: Managing platform-wide roles
+- **Actions**:
+  - Define role hierarchy
+  - Set permission levels
+  - Configure access scopes
+  - Update role settings
+- **Outcomes**:
+  - Clear role structure
+  - Proper permissions
+  - Secure access
+
+### Cluster User Management
+**Scenario**: Managing cluster-specific users
+- **Actions**:
+  - Add cluster administrators
+  - Assign hotel managers
+  - Configure staff access
+  - Monitor user activities
+- **Outcomes**:
+  - Organized access
+  - Clear responsibilities
+  - Efficient management
+
+### Hotel Staff Management
+**Scenario**: Managing hotel-level users
+- **Actions**:
+  - Add department staff
+  - Set role permissions
+  - Configure access levels
+  - Monitor activities
+- **Outcomes**:
+  - Proper staffing
+  - Clear roles
+  - Efficient operations
 
 ## Performance Management
 
 ### Resource Optimization
-**Scenario**: Platform resource management
+**Scenario**: Managing cluster resources
 - **Actions**:
   - Monitor resource usage
-  - Optimize resource allocation
-  - Scale resources as needed
+  - Optimize allocations
+  - Handle peak loads
+  - Plan capacity
 - **Outcomes**:
   - Optimal performance
-  - Cost efficiency
-  - Scalable infrastructure
+  - Efficient resource use
+  - Proper scaling
 
 ### Performance Monitoring
-**Scenario**: Platform-wide performance tracking
+**Scenario**: Monitoring cluster performance
 - **Actions**:
   - Track response times
   - Monitor system load
   - Identify bottlenecks
+  - Generate reports
 - **Outcomes**:
   - Consistent performance
-  - Proactive optimization
+  - Early problem detection
   - Better user experience
 
-## Tenant Management
+## Integration Management
 
-### Tenant Provisioning
-**Scenario**: Setting up new application instances
+### API Integration
+**Scenario**: Managing external integrations
 - **Actions**:
-  - Create tenant environment
-  - Configure initial settings
-  - Set up monitoring
+  - Configure API endpoints
+  - Set up authentication
+  - Monitor API usage
+  - Handle errors
 - **Outcomes**:
-  - Quick deployment
-  - Standardized setup
-  - Ready-to-use instances
+  - Reliable integration
+  - Secure connections
+  - Efficient operation
 
-### Tenant Support
-**Scenario**: Managing tenant-specific issues
+### Data Synchronization
+**Scenario**: Managing cross-system data
 - **Actions**:
-  - Track tenant-specific problems
-  - Apply tenant-specific fixes
-  - Monitor tenant health
+  - Configure sync rules
+  - Monitor data flow
+  - Handle conflicts
+  - Validate data
 - **Outcomes**:
-  - Personalized support
-  - Quick issue resolution
-  - Tenant satisfaction
-
-## User Onboarding & Access
-
-### User Invitation
-**Scenario**: Adding new users to clusters or business units
-- **Actions**:
-  - Admin initiates user invitation
-  - System generates secure invitation link
-  - Sends email with login instructions
-  - Tracks invitation status
-- **Outcomes**:
-  - Secure user onboarding
-  - Automated access provisioning
-  - Clear audit trail
-
-### Business Unit Access Management
-**Scenario**: Managing user access across business units
-- **Actions**:
-  - Assign users to business units
-  - Configure role-based permissions
-  - Send automated access notifications
-  - Update access records
-- **Outcomes**:
-  - Proper access scoping
-  - Automated user notification
-  - Maintained access control
-
-### Cluster Access Control
-**Scenario**: Managing cluster-level access
-- **Actions**:
-  - Grant cluster-level permissions
-  - Configure cluster-specific roles
-  - Send cluster access notifications
-  - Monitor cluster access
-- **Outcomes**:
-  - Controlled cluster access
-  - Clear access boundaries
-  - Secure cluster management
-
-### Multi-level Authorization
-**Scenario**: Managing hierarchical access permissions
-- **Actions**:
-  - Set up organization-level access
-  - Configure business unit permissions
-  - Establish cluster-level rights
-  - Manage inheritance rules
-- **Outcomes**:
-  - Consistent access hierarchy
-  - Proper permission inheritance
-  - Granular access control
-
-## Monitoring & Alerts
-
-### System Health Monitoring
-**Scenario**: Proactive system monitoring
-- **Actions**:
-  - Set up monitoring thresholds
-  - Configure alert rules
-  - Define escalation paths
-  - Set up notification channels
-- **Outcomes**:
-  - Early problem detection
-  - Proactive issue resolution
-  - Minimized downtime
-
-### Alert Management
-**Scenario**: Managing system alerts and notifications
-- **Actions**:
-  - Process incoming alerts
-  - Route to appropriate teams
-  - Track resolution status
-  - Generate alert reports
-- **Outcomes**:
-  - Efficient alert handling
-  - Reduced response time
-  - Improved system reliability
-
-## Backup & Recovery
-
-### Data Backup Management
-**Scenario**: Managing platform-wide backups
-- **Actions**:
-  - Configure backup schedules
-  - Monitor backup status
-  - Verify backup integrity
-  - Test restoration procedures
-- **Outcomes**:
-  - Data protection
-  - Reliable backups
-  - Quick recovery capability
-
-### Disaster Recovery
-**Scenario**: Handling system-wide recovery
-- **Actions**:
-  - Execute recovery procedures
-  - Restore from backups
-  - Verify system integrity
-  - Resume operations
-- **Outcomes**:
-  - Minimal data loss
-  - Quick service restoration
-  - Business continuity
+  - Accurate data
+  - Reliable sync
+  - Data integrity
 
 ## Audit & Compliance
 
-### Compliance Reporting
-**Scenario**: Generating compliance documentation
+### Activity Auditing
+**Scenario**: Tracking platform activities
 - **Actions**:
-  - Collect compliance data
-  - Generate required reports
-  - Track compliance status
-  - Document remediation
-- **Outcomes**:
-  - Regulatory compliance
-  - Audit readiness
-  - Risk management
-
-### Access Audit
-**Scenario**: Auditing system access and changes
-- **Actions**:
-  - Track access patterns
-  - Monitor configuration changes
+  - Log user actions
+  - Track system changes
   - Generate audit trails
-  - Review security events
+  - Store records
 - **Outcomes**:
   - Complete audit history
-  - Security compliance
-  - Change tracking
+  - Compliance readiness
+  - Clear tracking
 
-## License Management
-
-### License Administration
-**Scenario**: Managing platform licenses
+### Compliance Reporting
+**Scenario**: Managing compliance requirements
 - **Actions**:
-  - Track license usage
-  - Monitor expiration dates
-  - Handle license renewals
-  - Allocate licenses
+  - Generate reports
+  - Track compliance status
+  - Document changes
+  - Handle audits
 - **Outcomes**:
-  - License compliance
-  - Cost optimization
-  - Usage tracking
+  - Regulatory compliance
+  - Clear documentation
+  - Audit readiness
 
-## User Support
+## Support & Help
 
-### Support Ticket Management
-**Scenario**: Handling user support requests
+### Ticket Management
+**Scenario**: Handling support requests
 - **Actions**:
-  - Process support tickets
-  - Route to appropriate teams
-  - Track resolution progress
-  - Collect feedback
+  - Process incoming tickets
+  - Route to proper teams
+  - Track resolution
+  - Follow up
 - **Outcomes**:
-  - Efficient issue resolution
+  - Quick resolution
+  - Clear communication
   - User satisfaction
-  - Service improvement
 
-### Knowledge Base Management
-**Scenario**: Maintaining support documentation
+### Knowledge Base
+**Scenario**: Managing support resources
 - **Actions**:
-  - Create support articles
-  - Update documentation
+  - Create documentation
+  - Update guides
   - Organize resources
-  - Track usage patterns
+  - Track usage
 - **Outcomes**:
-  - Self-service enablement
-  - Reduced support load
-  - Improved user experience
+  - Clear documentation
+  - Easy access
+  - Self-service support
 
-## Report Management Use Cases
+## Subscription Management
 
-### 1. Tenant Administrator
-1. Tenant Report Management
-   - **Scenario**: Managing reports across a tenant
-   - **Actions**:
-     - View all business units in tenant
-     - Manage tenant-wide templates
-     - Configure tenant settings
-   - **Outcomes**:
-     - Consistent report distribution
-     - Efficient tenant management
-     - Standardized reporting
+### Plan Management
+**Scenario**: Managing business unit subscription plans
+- **Actions**:
+  - Configure user-based pricing tiers
+  - Set module access levels
+  - Define user limits per plan
+  - Configure module combinations
+- **Outcomes**:
+  - Clear pricing structure
+  - Module-based access
+  - User-based scaling
 
-2. Business Unit Assignment
-   - **Scenario**: Assigning reports to business units
-   - **Actions**:
-     - Select multiple reports
-     - Choose target business units
-     - Configure assignments
-     - Set access permissions
-   - **Outcomes**:
-     - Organized report distribution
-     - Clear assignment structure
-     - Proper access control
+### Business Unit Subscription
+**Scenario**: Managing individual hotel subscriptions
+- **Actions**:
+  - Assign subscription plans to hotels
+  - Configure module access
+  - Set user allocations
+  - Handle plan changes
+- **Outcomes**:
+  - Per-hotel billing
+  - Module-based access
+  - User limit compliance
 
-### 2. Business Unit Manager
-1. Report Access Management
-   - **Scenario**: Managing assigned reports
-   - **Actions**:
-     - View assigned reports
-     - Configure report settings
-     - Manage user access
-     - Track report status
-   - **Outcomes**:
-     - Efficient report access
-     - Clear visibility of assignments
-     - Proper user management
+### User Count Monitoring
+**Scenario**: Tracking business unit user counts
+- **Actions**:
+  - Monitor active users
+  - Track user additions/removals
+  - Alert on limit approaches
+  - Generate usage reports
+- **Outcomes**:
+  - User limit compliance
+  - Proactive notifications
+  - Clear capacity tracking
 
-2. Template Customization
-   - **Scenario**: Customizing report templates
-   - **Actions**:
-     - View available templates
-     - Apply business unit settings
-     - Configure parameters
-     - Save customizations
-   - **Outcomes**:
-     - Tailored reporting
-     - Consistent formatting
-     - Business unit relevance
+### Billing Management
+**Scenario**: Managing per-hotel billing
+- **Actions**:
+  - Calculate user-based charges
+  - Generate hotel-specific invoices
+  - Process individual payments
+  - Track billing history
+- **Outcomes**:
+  - Accurate per-hotel billing
+  - User-based pricing
+  - Clear financial tracking
 
-### 3. Template Administrator
-1. Template Management
-   - **Scenario**: Managing report templates
-   - **Actions**:
-     - Create/edit templates
-     - Manage versions
-     - Set distribution rules
-     - Configure permissions
-   - **Outcomes**:
-     - Standardized templates
-     - Version control
-     - Controlled distribution
+### Module Management
+**Scenario**: Managing module access
+- **Actions**:
+  - Configure module combinations
+  - Set module-specific pricing
+  - Track module usage
+  - Manage access rights
+- **Outcomes**:
+  - Flexible module access
+  - Clear module pricing
+  - Usage optimization
 
-2. Template Distribution
-   - **Scenario**: Distributing templates to tenants
-   - **Actions**:
-     - Select target tenants
-     - Configure access levels
-     - Set customization rules
-     - Monitor distribution
-   - **Outcomes**:
-     - Efficient template delivery
-     - Proper access control
-     - Tracked distribution
+### Add-on Management
+**Scenario**: Managing business unit add-ons
+- **Actions**:
+  - Configure module add-ons
+  - Set user-based pricing
+  - Track module utilization
+  - Manage access levels
+- **Outcomes**:
+  - Module customization
+  - User-based pricing
+  - Access tracking
 
-### 4. System Administrator
-1. Tenant Configuration
-   - **Scenario**: Setting up tenant structure
-   - **Actions**:
-     - Define tenants
-     - Assign business units
-     - Configure permissions
-     - Set up hierarchies
-   - **Outcomes**:
-     - Organized structure
-     - Clear hierarchies
-     - Proper access control
-
-2. Access Management
-   - **Scenario**: Managing system access
-   - **Actions**:
-     - Set tenant permissions
-     - Configure role access
-     - Manage user rights
-     - Monitor access
-   - **Outcomes**:
-     - Secure access
-     - Clear permissions
-     - Proper controls
+### Subscription Analytics
+**Scenario**: Analyzing business unit metrics
+- **Actions**:
+  - Track per-hotel user counts
+  - Monitor module usage
+  - Analyze access patterns
+  - Generate detailed reports
+- **Outcomes**:
+  - Module-level insights
+  - User growth tracking
+  - Revenue optimization

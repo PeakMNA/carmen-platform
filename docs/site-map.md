@@ -1,156 +1,179 @@
 # Carmen Platform Site Map
 
-## Public Area
-- `/` - Landing page
-- `/login` - Login page
-- `/register` - Registration page
-- `/forgot-password` - Password recovery
-- `/reset-password` - Password reset
+## Public Pages
+- / (Landing Page)
+- /login
+- /register
+- /contact
+- /support
+- /pricing
 
-## Admin Dashboard
-- `/admin/dashboard` - Main dashboard
-  - Overview metrics
-  - Recent activity
-  - Quick actions
-  - System status
+## Authentication
+- /auth/login
+- /auth/register
+- /auth/forgot-password
+- /auth/reset-password
+- /auth/verify-email
 
-## Clusters Management
-- `/admin/clusters` - Clusters overview
-  - List of all clusters
-  - Cluster metrics
-  - Add/Edit clusters
+## Dashboard
+- /dashboard
+  - Platform Admin View
+  - Cluster Admin View
+  - Hotel Manager View
+  - Staff View
 
-### Cluster Details
-- `/admin/clusters/[clusterId]` - Individual cluster view
-  - Cluster overview
-  - Performance metrics
-  - Resource allocation
+## Platform Administration
+- /admin
+  - /clusters
+    - Overview
+    - /[clusterId]
+      - Details
+      - Settings
+      - /business-units
+        - List
+        - /[businessUnitId]
+          - Details
+          - Users
+          - Templates
+          - Settings
+      - /templates
+        - Library
+        - Assignments
+      - /members
+        - Users
+        - Roles
+  - /templates
+    - Library
+    - Categories
+    - Data Points
+  - /users
+    - All Users
+    - Roles
+    - Permissions
+  - /settings
+    - Platform Settings
+    - Security
+    - Integrations
+    - Subscription
 
-### Business Units
-- `/admin/clusters/[clusterId]/business-units` - Business units list
-  - Unit metrics
-  - Active units
-  - Resource usage
-  - Team distribution
+## Cluster Management
+- /clusters/[clusterId]
+  - Dashboard
+  - /business-units
+    - List
+    - Management
+  - /templates
+    - Available Templates
+    - Assignments
+  - /members
+    - Staff
+    - Roles
+  - /reports
+    - Generation
+    - History
+  - /settings
+    - Cluster Settings
+    - Notifications
+    - Integrations
 
-#### Business Unit Management
-- `/admin/clusters/[clusterId]/business-units/add` - Add new business unit
-  - Basic information
-  - Location details
-  - Contact information
-  - Notification settings
-- `/admin/clusters/[clusterId]/business-units/[businessUnitId]` - Business unit details
-  - Overview
-  - Teams
-  - Tenants
-  - Resources
-- `/admin/clusters/[clusterId]/business-units/[businessUnitId]/edit` - Edit business unit
-  - Update information
-  - Modify settings
-  - Manage integrations
+## Hotel Management
+- /hotels/[hotelId]
+  - Dashboard
+  - /staff
+    - Members
+    - Departments
+    - Roles
+  - /reports
+    - Templates
+    - Generation
+    - History
+  - /settings
+    - Hotel Settings
+    - Notifications
+    - Preferences
+
+## Report Management
+- /reports
+  - /templates
+    - Library
+    - Categories
+    - Data Points
+  - /assignments
+    - By Cluster
+    - By Hotel
+  - /generation
+    - New Report
+    - History
+  - /settings
+    - Preferences
+    - Schedules
+    - Distribution
 
 ## User Management
-- `/admin/users` - Users overview
-  - User list
-  - Role management
-  - Access control
-  - User metrics
-
-### User Details
-- `/admin/users/[userId]` - Individual user view
-  - Profile information
-  - Access rights
-  - Activity history
-- `/admin/users/[userId]/edit` - Edit user profile
-  - Update information
-  - Modify permissions
-  - Change settings
-
-## Reports
-- `/admin/reports` - Reports dashboard
-  - Report templates
-  - Generated reports
-  - Scheduled reports
-- `/admin/reports/[reportId]` - Report details
-  - Report data
-  - Export options
-  - Share settings
-- `/admin/reports/generate` - Generate new report
-  - Template selection
-  - Data filters
-  - Output format
-
-## Support
-- `/admin/support` - Support center
-  - Help articles
-  - Contact options
-  - System status
-- `/admin/support/tickets` - Support tickets
-  - Active tickets
-  - Ticket history
-  - Response metrics
-- `/admin/support/knowledge-base` - Knowledge base
-  - Articles
-  - Tutorials
-  - FAQs
+- /users
+  - /platform
+    - All Users
+    - Roles
+    - Access Logs
+  - /clusters
+    - By Cluster
+    - Roles
+    - Activity
+  - /hotels
+    - By Hotel
+    - Departments
+    - Staff
 
 ## Settings
-- `/admin/settings` - Platform settings
-  - General settings
-  - Security settings
-  - Notification preferences
-- `/admin/settings/profile` - User profile settings
-  - Personal information
-  - Preferences
-  - Security settings
-- `/admin/settings/organization` - Organization settings
-  - Company details
-  - Branding
-  - Billing
-- `/admin/settings/integrations` - Integration settings
-  - API configuration
-  - Webhook setup
-  - Third-party services
+- /settings
+  - /profile
+    - Personal Info
+    - Preferences
+    - Security
+  - /organization
+    - Details
+    - Branding
+    - Policies
+  - /security
+    - Access Control
+    - MFA
+    - Audit Logs
+  - /notifications
+    - Preferences
+    - Channels
+    - Rules
+  - /subscription
+    - Plans
+    - Usage
+    - Billing
+
+## Support
+- /support
+  - /tickets
+    - Active
+    - Resolved
+    - Create New
+  - /knowledge-base
+    - Articles
+    - Guides
+    - FAQs
+  - /contact
+    - Support Team
+    - Feedback
+    - Help Center
 
 ## API Documentation
-- `/docs/api` - API documentation
-  - Authentication
-  - Endpoints
-  - Examples
-- `/docs/api/reference` - API reference
-  - Methods
-  - Parameters
-  - Response formats
-
-## Change Frequency
-- Daily Updates:
-  - Dashboard
-  - Business Units
-  - Reports
-  - Support Tickets
-- Weekly Updates:
-  - Users
-  - Support Articles
-  - Knowledge Base
-- Monthly Updates:
-  - Settings
-  - Organization Details
-  - Integration Configurations
-- Yearly Updates:
-  - API Documentation
-  - Platform Information
-  - Legal Documents
-
-## SEO Priorities
-1. High Priority (1.0)
-   - Landing Page
-   - Login
-   - Dashboard
-2. Medium Priority (0.8)
-   - Clusters
-   - Business Units
-   - Reports
-3. Lower Priority (0.6)
-   - Settings
-   - Support
-   - Documentation
+- /docs
+  - /api
+    - Reference
+    - Authentication
+    - Endpoints
+    - Examples
+  - /guides
+    - Getting Started
+    - Integration
+    - Best Practices
+  - /sdks
+    - Libraries
+    - Tools
+    - Resources

@@ -46,10 +46,46 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: 'https://carmen-platform.com/admin/business-units/[businessUnitId]/users',
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.7,
+    },
+    {
+      url: 'https://carmen-platform.com/admin/business-units/[businessUnitId]/users/[userId]/roles',
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.6,
+    },
+    {
+      url: 'https://carmen-platform.com/admin/business-units/[businessUnitId]/roles',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.6,
+    },
+    {
       url: 'https://carmen-platform.com/admin/reports',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.7,
+    },
+    {
+      url: 'https://carmen-platform.com/admin/reports/templates',
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.7,
+    },
+    {
+      url: 'https://carmen-platform.com/admin/business-units/[businessUnitId]/templates',
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.7,
+    },
+    {
+      url: 'https://carmen-platform.com/admin/business-units/[businessUnitId]/templates/[templateId]',
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.6,
     },
     {
       url: 'https://carmen-platform.com/admin/support',
@@ -64,4 +100,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
   ]
-} 
+}

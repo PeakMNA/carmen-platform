@@ -11,17 +11,12 @@ import {
   Settings,
   Users,
   ArrowLeft,
-  Globe,
-  Database,
-  Mail,
-  MessageSquare,
-  Webhook,
   Plus,
 } from "lucide-react"
 import Link from "next/link"
 import { BusinessUnitsTab } from "@/components/clusters/BusinessUnitsTab"
-import { ReportsTab } from "@/components/clusters/ReportsTab"
-import { UsersTab } from "@/components/clusters/UsersTab"
+import { ClusterTemplates } from "@/components/clusters/ClusterTemplates"
+import { ClusterUsers } from "@/components/clusters/ClusterUsers"
 import { SettingsTab } from "@/components/clusters/SettingsTab"
 
 // Mock data - replace with API call
@@ -34,45 +29,52 @@ const clusterData = {
     brandCode: "LHI",
     website: "https://www.luxuryhotels.com",
   },
-  database: {
-    type: "PostgreSQL",
-    host: "db.apac.luxuryhotels.com",
-    status: "connected",
-  },
-  domains: [
-    "apac.luxuryhotels.com",
-    "booking.luxuryhotels.asia",
-  ],
-  contacts: {
-    primary: "admin@luxuryhotels.com",
-    technical: "tech@luxuryhotels.com",
-    billing: "finance@luxuryhotels.com",
-  },
   stats: {
     businessUnits: 12,
     activeReports: 156,
     users: 89,
     status: "active",
   },
-  notifications: {
-    email: {
-      enabled: true,
-      dailyDigest: true,
-      alerts: true,
-      reportGeneration: true,
+  templates: [
+    {
+      id: "template_1",
+      name: "Monthly Financial Report",
+      type: "Financial",
+      assignedCount: 8
     },
-    slack: {
-      enabled: true,
-      webhookUrl: "https://hooks.slack.com/services/xxx",
-      channels: ["#alerts", "#reports"],
+    {
+      id: "template_2",
+      name: "Inventory Status Report",
+      type: "Operations",
+      assignedCount: 5
     },
-    webhook: {
-      enabled: true,
-      endpoints: [
-        { url: "https://api.example.com/webhook", events: ["alerts", "reports"] },
-      ],
+    {
+      id: "template_3",
+      name: "Staff Performance Report",
+      type: "HR",
+      assignedCount: 3
+    }
+  ],
+  members: [
+    {
+      id: "user_1",
+      name: "John Smith",
+      role: "Cluster Admin",
+      status: "active"
     },
-  },
+    {
+      id: "user_2",
+      name: "Sarah Chen",
+      role: "Report Manager",
+      status: "active"
+    },
+    {
+      id: "user_3",
+      name: "Mike Johnson",
+      role: "Business Unit Manager",
+      status: "inactive"
+    }
+  ]
 }
 
 export default function ClusterDetailsPage({
@@ -109,7 +111,7 @@ export default function ClusterDetailsPage({
       </div>
 
       {/* Overview Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Business Units</CardTitle>
@@ -156,149 +158,89 @@ export default function ClusterDetailsPage({
         </Card>
       </div>
 
-      {/* Basic Information */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Basic Information</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-6 md:grid-cols-2">
-            {/* Hotel Group Info */}
-            <div className="space-y-4">
-              <h3 className="font-semibold">Hotel Group Details</h3>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm">
-                  <Building2 className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium">Group Name:</span>
-                  <span>{clusterData.hotelGroup.name}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Globe className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium">Website:</span>
-                  <a href={clusterData.hotelGroup.website} className="text-primary hover:underline">
-                    {clusterData.hotelGroup.website}
-                  </a>
-                </div>
+      {/* Quick Access Lists */}
+      <div className="grid gap-6 md:grid-cols-2 mb-6">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <FileText className="h-5 w-5 text-muted-foreground" />
+                Available Templates
               </div>
-            </div>
-
-            {/* Database Info */}
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => {
+                  const templatesTab = document.querySelector('[value="templates"]') as HTMLElement
+                  if (templatesTab) templatesTab.click()
+                }}
+              >
+                View All
+              </Button>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
             <div className="space-y-4">
-              <h3 className="font-semibold">Database Information</h3>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm">
-                  <Database className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium">Type:</span>
-                  <span>{clusterData.database.type}</span>
+              {clusterData.templates.map((template) => (
+                <div key={template.id} className="flex items-center justify-between">
+                  <div>
+                    <div className="font-medium">{template.name}</div>
+                    <div className="text-sm text-muted-foreground">
+                      {template.assignedCount} business units
+                    </div>
+                  </div>
+                  <Badge>{template.type}</Badge>
                 </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Globe className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium">Host:</span>
-                  <span>{clusterData.database.host}</span>
-                  <Badge variant="outline" className="ml-2">
-                    {clusterData.database.status}
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-muted-foreground" />
+                Cluster Members
+              </div>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => {
+                  const usersTab = document.querySelector('[value="users"]') as HTMLElement
+                  if (usersTab) usersTab.click()
+                }}
+              >
+                View All
+              </Button>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {clusterData.members.map((member) => (
+                <div key={member.id} className="flex items-center justify-between">
+                  <div>
+                    <div className="font-medium">{member.name}</div>
+                    <div className="text-sm text-muted-foreground">{member.role}</div>
+                  </div>
+                  <Badge 
+                    variant={member.status === "active" ? "default" : "secondary"}
+                  >
+                    {member.status}
                   </Badge>
                 </div>
-              </div>
+              ))}
             </div>
-
-            {/* Domains */}
-            <div className="space-y-4">
-              <h3 className="font-semibold">Domains</h3>
-              <div className="space-y-2">
-                {clusterData.domains.map((domain, index) => (
-                  <div key={index} className="flex items-center gap-2 text-sm">
-                    <Globe className="h-4 w-4 text-muted-foreground" />
-                    <span>{domain}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Contact Information */}
-            <div className="space-y-4">
-              <h3 className="font-semibold">Contact Information</h3>
-              <div className="space-y-2">
-                {Object.entries(clusterData.contacts).map(([type, email]) => (
-                  <div key={type} className="flex items-center gap-2 text-sm">
-                    <Mail className="h-4 w-4 text-muted-foreground" />
-                    <span className="font-medium capitalize">{type}:</span>
-                    <a href={`mailto:${email}`} className="text-primary hover:underline">
-                      {email}
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Notification Settings */}
-            <div className="space-y-4">
-              <h3 className="font-semibold">Notification Settings</h3>
-              <div className="grid gap-4 md:grid-cols-3">
-                {/* Email Notifications */}
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Mail className="h-4 w-4 text-muted-foreground" />
-                    <span className="font-medium">Email Notifications</span>
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    {clusterData.notifications.email.enabled ? (
-                      <ul className="space-y-1">
-                        {clusterData.notifications.email.dailyDigest && <li>• Daily Digest</li>}
-                        {clusterData.notifications.email.alerts && <li>• System Alerts</li>}
-                        {clusterData.notifications.email.reportGeneration && <li>• Report Generation</li>}
-                      </ul>
-                    ) : (
-                      "Disabled"
-                    )}
-                  </div>
-                </div>
-
-                {/* Slack Integration */}
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <MessageSquare className="h-4 w-4 text-muted-foreground" />
-                    <span className="font-medium">Slack Integration</span>
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    {clusterData.notifications.slack.enabled ? (
-                      <ul className="space-y-1">
-                        <li>• {clusterData.notifications.slack.channels.length} channels configured</li>
-                      </ul>
-                    ) : (
-                      "Not configured"
-                    )}
-                  </div>
-                </div>
-
-                {/* Webhooks */}
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Webhook className="h-4 w-4 text-muted-foreground" />
-                    <span className="font-medium">Custom Webhooks</span>
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    {clusterData.notifications.webhook.enabled ? (
-                      <ul className="space-y-1">
-                        <li>• {clusterData.notifications.webhook.endpoints.length} endpoints configured</li>
-                      </ul>
-                    ) : (
-                      "Not configured"
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Tabs */}
       <Tabs defaultValue="business-units" className="space-y-4">
         <div className="flex items-center justify-between">
           <TabsList>
             <TabsTrigger value="business-units">Business Units</TabsTrigger>
-            <TabsTrigger value="reports">Reports</TabsTrigger>
+            <TabsTrigger value="templates">Templates</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
             <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
@@ -312,11 +254,11 @@ export default function ClusterDetailsPage({
         <TabsContent value="business-units" className="space-y-4">
           <BusinessUnitsTab clusterId={clusterId} />
         </TabsContent>
-        <TabsContent value="reports" className="space-y-4">
-          <ReportsTab />
+        <TabsContent value="templates" className="space-y-4">
+          <ClusterTemplates />
         </TabsContent>
         <TabsContent value="users" className="space-y-4">
-          <UsersTab />
+          <ClusterUsers />
         </TabsContent>
         <TabsContent value="settings" className="space-y-4">
           <SettingsTab />
@@ -324,4 +266,4 @@ export default function ClusterDetailsPage({
       </Tabs>
     </div>
   )
-} 
+}

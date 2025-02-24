@@ -30,7 +30,7 @@ export default function LoginPage() {
       <CardFooter className="flex flex-col space-y-4">
         <div className="flex w-full items-center justify-between">
           <div className="text-sm text-muted-foreground">
-            Don't have an invitation?{" "}
+            Don&apos;t have an invitation?{" "}
             <Link 
               href="/contact" 
               className="text-primary-600 hover:text-primary-700"

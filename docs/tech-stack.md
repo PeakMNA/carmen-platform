@@ -118,6 +118,25 @@
   - CDN integration
   - Automatic HTTPS
 
+## Notification System
+- **Web Push**
+  - Service Workers for offline support
+  - Web Push API integration
+  - Browser Notifications API
+  - Push subscription management
+
+- **Real-time Communication**
+  - SignalR for WebSocket connections
+  - Server-Sent Events (SSE) support
+  - Event sourcing and processing
+  - Message queuing with Redis
+
+- **Push Services**
+  - Firebase Cloud Messaging (FCM)
+  - Cross-platform notification delivery
+  - Token management and analytics
+  - Notification templates
+
 ## Additional Tools
 - **date-fns** - Date manipulation
 - **zod** - Schema validation
@@ -127,6 +146,9 @@
 - **recharts** - Data visualization
 - **react-dropzone** - File upload handling
 - **next-i18next** - Internationalization
+- **web-push** - Web Push protocol implementation
+- **@microsoft/signalr** - Real-time notifications
+- **ioredis** - Redis client for message queuing
 
 ## Development Environment
 - **Node.js** (v18.17 or later)
