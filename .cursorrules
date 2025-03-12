@@ -101,256 +101,257 @@ If needed, you can further use the `web_scraper.py` file to scrape the web page 
 - Add debug information to stderr while keeping the main output clean in stdout for better pipeline integration
 - When using seaborn styles in matplotlib, use 'seaborn-v0_8' instead of 'seaborn' as the style name due to recent seaborn version changes
 - use 'npx shadcn@latest add' to add a component
+- In Next.js 15, dynamic route parameters (`params`) are now Promises that need to be awaited before accessing their properties. Make page components async and await params: `const { id } = await params;`
+- Separate server components (for handling params) from client components (for UI and state) in Next.js 15 for better architecture
+- When updating API data, ensure the data types match the expected API types (e.g., converting 'maintenance' status to 'inactive' if the API only accepts certain values)
+- In Next.js, async/await is only supported in Server Components, not in Client Components (marked with "use client"). Never mark a component with "use client" if it needs to use async/await.
+- When implementing user management in business units, filter out platform staff users to prevent them from being added to business units.
+- When adding new functionality to an existing component, check for similar implementations in related components to maintain consistency.
+- When working with role-based systems, ensure proper validation of system IDs in service methods to prevent unauthorized access.
+- For multi-tab interfaces, maintain consistent tab structure and naming conventions across similar components.
+- When implementing license management features, ensure proper handling of license limits and provide clear visual indicators when approaching those limits.
+- For user-related components, always filter out platform administrators from operations that could affect their access or permissions.
+- When displaying distribution metrics, use appropriate visualizations (like progress bars) to make the data more understandable at a glance.
+- Include optimization tips and recommendations when implementing resource management features to help users make better decisions.
+- When implementing sidebar navigation, ensure that all routes referenced in the sidebar actually exist in the Next.js app structure.
+- For tab-based navigation, use URL query parameters (e.g., ?tab=licenses) to allow direct linking to specific tabs and maintain state on page refresh.
+- When creating placeholder pages for routes, implement basic functionality that aligns with the overall application design to ensure a consistent user experience.
+- When updating feature requirements, ensure consistency between UI components, documentation, and sidebar navigation to maintain a cohesive user experience.
+- When working with TypeScript and complex object structures, use type guards to safely access properties. For example, use `isAccountingConfig(config)` to check if an object has the properties of an AccountingConfig before accessing those properties.
+- When defining TypeScript interfaces with index signatures, ensure that the specific properties are compatible with the index signature type. Consider using union types or type assertions when necessary.
+- Use the `unknown` type instead of `any` for better type safety in TypeScript, especially when working with data from external sources or when the exact type is not known at compile time.
+- When using TypeScript with React components, ensure that props like `defaultValue` and `defaultChecked` have the correct types as expected by the component library (e.g., string, number, or CheckedState).
+- Create reusable UI components in separate files to improve code organization and type safety. For example, create a DataTable component in its own file with proper TypeScript types instead of using inline components with `any` types.
+- When converting between different type systems (e.g., from a library's types to your own), use type assertions with caution and provide proper type narrowing to maintain type safety.
+- When fixing ESLint errors, group similar issues together and address them systematically to avoid introducing new issues.
+- For unescaped entities in JSX (like apostrophes), replace them with their HTML entity equivalents (`&apos;` or `&#39;`) to avoid React warnings.
+- Remove unused imports and variables to keep the codebase clean and improve build performance.
+- Replace empty interfaces with more specific types or extend existing interfaces to provide better type safety.
+- Avoid using `any` type in TypeScript and instead use more specific types or `unknown` with type guards.
+- In Next.js 15 API routes, the params object is a Promise that needs to be awaited before accessing its properties. Use the correct type: `{ params: Promise<{ paramName: string }> }`.
+- When handling form data with complex nested objects, ensure the handleChange function can accept both string and object values.
+- When using third-party libraries like next-themes, check the correct type definitions and consider defining your own types if the library's types are not accessible.
+- For toast notifications, understand that the toast function doesn't have a dismiss method directly attached to it. Use the dismiss method from the useToast hook instead.
 
 # Scratchpad
 
-## Current Task: Plan Carmen Platform Implementation
+## Current Task: Fix ESLint Errors for Successful Build
 
-### System Components
-1. Frontend
-   - Next.js 15 App Router
-   - TailwindCSS + Shadcn/ui
-   - React Query + Zustand
+### Task Description
+Fix the ESLint errors that are preventing a successful build of the Carmen Platform.
 
-2. Backend
-   - Next.js API Routes
-   - tRPC for type-safe APIs
-   - PostgreSQL + Prisma
-   - NextAuth.js for authentication
+### Implementation Steps
+[X] Fix unescaped entities (apostrophes)
+  [X] src/app/(auth)/forgot-password/page.tsx
+  [X] src/components/dashboard/DashboardHeader.tsx
 
-3. Infrastructure
-   - Vercel deployment
-   - GitHub Actions CI/CD
-   - Monitoring & logging
+[X] Fix unused imports and variables
+  [X] src/app/(dashboard)/admin/clusters/add/page.tsx - Remove unused 'Textarea'
+  [X] src/app/(dashboard)/admin/reports/layout.tsx - Remove unused imports
+  [X] src/app/api/reports/route.ts - Remove unused 'db' and 'error'
+  [X] src/components/auth/ForgotPasswordForm.tsx - Remove unused 'error'
+  [X] src/components/auth/LoginForm.tsx - Remove unused 'error'
+  [X] src/components/auth/RegisterForm.tsx - Remove unused 'error'
+  [X] src/components/forms/ContactForm.tsx - Remove unused 'error'
+  [X] src/components/reports/ReportDetails.tsx - Remove unused 'useState'
+  [X] src/components/reports/SelectedReportsPreview.tsx - Remove unused 'onConfigChange'
+  [X] src/components/reports/TemplateDistribution.tsx - Remove unused 'selectedTenants'
+  [X] src/components/settings/SettingsForm.tsx - Remove unused 'Button'
 
-### Implementation Phases
+[X] Fix empty interface declarations
+  [X] src/components/dashboard/QuickActions.tsx
+  [X] src/components/dashboard/RecentActivity.tsx
 
-#### Phase 1: Core Platform (8 weeks)
-[X] Project Setup
-    [X] Repository initialization
-    [X] Development environment
-    [X] CI/CD pipeline
+[X] Fix variables assigned but only used as types
+  [X] src/components/ui/use-toast.ts - Fix 'actionTypes'
+  [X] src/hooks/use-toast.ts - Fix 'actionTypes'
 
-[ ] Authentication System (2 weeks)
-    [ ] Email invitation flow
-    [ ] OAuth integration
-    [ ] MFA setup
-    [ ] Session management
+[X] Fix explicit 'any' types
+  [X] src/components/reports/SelectedReportsPreview.tsx - Replace 'any' with specific type
 
-[ ] Multi-tenant Foundation (3 weeks)
-    [ ] Database schema design
-    [ ] Tenant isolation
-    [ ] Resource management
-    [ ] Access control
+[X] Fix type errors in API routes
+  [X] src/app/api/business-units/[businessUnitId]/users/[userId]/roles/route.ts - Fix params type
+  [X] Update API route handlers to use the correct Promise type for params
+  [X] Add proper await for params in all API route handlers
+  [X] Fix method names in user role management API to match service methods
 
-[ ] Basic UI (3 weeks)
-    [ ] Dashboard layout
-    [ ] Navigation structure
-    [ ] Core components
-    [ ] Responsive design
+[X] Fix type errors in form handling
+  [X] src/app/(dashboard)/admin/clusters/add/page.tsx - Fix handleChange function
+  [X] src/components/clusters/AddBusinessUnitSheet.tsx - Fix form data transformation
 
-#### Phase 2: Management Features (6 weeks)
-[ ] User Management (2 weeks)
-    [ ] User CRUD operations
-    [ ] Role management
-    [ ] Permission system
-    [ ] Team organization
+[X] Fix theme provider type errors
+  [X] src/components/theme-provider.tsx - Fix ThemeProviderProps type
 
-[ ] Monitoring System (2 weeks)
-    [ ] Health checks
-    [ ] Alert system
-    [ ] Performance metrics
-    [ ] Logging infrastructure
+[X] Fix toast notifications
+  [X] src/lib/notifications.ts - Fix toast.dismiss() usage
 
-[ ] Support System (2 weeks)
-    [ ] Ticket management
-    [ ] Knowledge base
-    [ ] Documentation system
-    [ ] Support workflows
-
-#### Phase 3: Integration & Enhancement (6 weeks)
-[ ] API Development (2 weeks)
-    [ ] RESTful endpoints
-    [ ] Webhook system
-    [ ] API documentation
-    [ ] Rate limiting
-
-[ ] Advanced Features (2 weeks)
-    [ ] Advanced analytics
-    [ ] Custom reporting
-    [ ] Audit logging
-    [ ] Compliance tools
-
-[ ] Platform Optimization (2 weeks)
-    [ ] Performance tuning
-    [ ] Security hardening
-    [ ] Scalability testing
-    [ ] Documentation completion
-
-### Technical Requirements
-
-#### Database Schema
-- Tenants
-- Users
-- Roles
-- Permissions
-- Teams
-- Audit Logs
-- Support Tickets
-- Knowledge Base
-
-#### API Endpoints
-- Authentication
-- User Management
-- Tenant Management
-- System Monitoring
-- Support System
-- Integration Points
-
-#### UI Components
-- Authentication forms
-- Dashboard layouts
-- Management interfaces
-- Monitoring displays
-- Support tools
-
-### UI Components - Tenant Management
-
-#### Tenant Dashboard (/admin/tenants)
-1. Tenant Overview
-   - Tenant list with status
-   - Resource usage metrics
-   - Active users count
-   - Health status indicators
-   - Quick action buttons
-
-2. Tenant Creation Wizard
-   - Step 1: Basic Information
-     - Tenant name
-     - Description
-     - Business unit
-     - Contact information
-   - Step 2: Resource Allocation
-     - Storage limits
-     - User quotas
-     - API rate limits
-   - Step 3: Security Settings
-     - Authentication methods
-     - IP restrictions
-     - Security policies
-   - Step 4: Feature Configuration
-     - Enabled features
-     - Integration options
-     - Custom settings
-
-3. Tenant Management Interface
-   - Configuration
-     - General settings
-     - Custom domain setup
-     - Branding options
-     - Notification preferences
-   - Resource Management
-     - Storage usage
-     - User license allocation
-     - API usage monitoring
-     - Resource scaling controls
-   - Access Control
-     - User management
-     - Role assignments
-     - Permission settings
-     - Access policies
-   - Monitoring
-     - Health metrics
-     - Performance data
-     - Usage statistics
-     - Audit logs
-
-4. Tenant Support Tools
-   - Issue tracking
-   - Support ticket management
-   - Knowledge base access
-   - Documentation center
-
-#### Implementation Priority
-[ ] Phase 1: Core Tenant Management (2 weeks)
-    [ ] Tenant list view
-    [ ] Basic creation form
-    [ ] Essential settings
-    [ ] Resource monitoring
-
-[ ] Phase 2: Advanced Features (2 weeks)
-    [ ] Full creation wizard
-    [ ] Detailed configuration
-    [ ] Resource management
-    [ ] Access control
-
-[ ] Phase 3: Support & Monitoring (2 weeks)
-    [ ] Support integration
-    [ ] Advanced monitoring
-    [ ] Audit capabilities
-    [ ] Custom reporting
-
-#### UI Components Required
-1. List Views
-   - TenantList
-   - UserList
-   - ResourceList
-   - AuditList
-
-2. Forms
-   - TenantCreationForm
-   - TenantSettingsForm
-   - ResourceAllocationForm
-   - SecurityConfigForm
-
-3. Dashboards
-   - TenantOverviewDashboard
-   - ResourceUsageDashboard
-   - MonitoringDashboard
-   - AuditDashboard
-
-4. Modals & Wizards
-   - TenantCreationWizard
-   - ResourceAllocationModal
-   - SecuritySettingsModal
-   - FeatureConfigModal
-
-5. Charts & Metrics
-   - ResourceUsageChart
-   - UserActivityChart
-   - PerformanceMetrics
-   - HealthStatusIndicators
-
-#### Technical Considerations
-- Implement proper loading states
-- Handle error scenarios gracefully
-- Ensure responsive design
-- Maintain consistent styling
-- Support dark/light modes
-- Implement proper validation
-- Add proper tooltips and help text
-- Ensure accessibility compliance
+[X] Update the CHANGELOG.md to document the fixes
+[X] Test the build after fixing the errors
 
 ### Next Steps
-1. [ ] Create detailed technical specifications
-2. [ ] Set up development environment
-3. [ ] Initialize project structure
-4. [ ] Begin Phase 1 implementation
+[X] Commit the changes with a descriptive message
 
-### Key Considerations
-- Ensure proper tenant isolation
-- Implement robust security measures
-- Design for scalability
-- Maintain comprehensive documentation
-- Follow best practices for each technology
+## Current Task: Implement User Management in Business Units
+
+### Task Description
+Add user management capabilities to the business unit edit page, allowing users to be added to business units with specific roles, except for platform staff.
+
+### Implementation Steps
+[X] Create BusinessUnitEditUsers component
+  [X] Implement user listing functionality
+  [X] Add user role management
+  [X] Implement user filtering (exclude platform staff)
+  [X] Add role distribution visualization
+
+[X] Update EditBusinessUnitClient component
+  [X] Add Users tab to the tab list
+  [X] Add BusinessUnitEditUsers component to the tab content
+
+[X] Update userService
+  [X] Add support for "carmen-platform" system ID
+
+[X] Update documentation
+  [X] Update CHANGELOG.md with new features
+  [X] Update .cursorrules with learnings
+
+### Next Steps
+[X] Test the implementation
+  [X] Verify user listing works correctly
+  [X] Test adding users to business units
+  [X] Test removing users from business units
+  [X] Verify role distribution visualization
+
+## Current Task: Implement Subscription License Management
+
+### Task Description
+Add license management capabilities to the subscription menu, allowing administrators to assign and manage user licenses with different license types.
+
+### Implementation Steps
+[X] Create SubscriptionLicenseManagement component
+  [X] Implement license assignment functionality
+  [X] Add license type selection
+  [X] Implement license utilization visualization
+  [X] Add license distribution analytics
+  [X] Provide optimization recommendations
+
+[X] Update Subscriptions page
+  [X] Add tabbed interface for license management
+  [X] Integrate SubscriptionLicenseManagement component
+  [X] Add navigation between overview and license management
+
+[X] Update documentation
+  [X] Update CHANGELOG.md with new features
+  [X] Update .cursorrules with learnings
+
+### Next Steps
+[X] Test the implementation
+  [X] Verify license assignment works correctly
+  [X] Test removing licenses from users
+  [X] Verify license utilization visualization
+  [X] Test license distribution analytics
+
+## Current Task: Implement Business Unit Configuration
+
+### Task Description
+Create a detailed Business Unit configuration page that allows for managing module activation, license allocation, and user management for a specific business unit.
+
+### Implementation Steps
+[X] Create BusinessUnitDetailPage component
+  [X] Implement module activation functionality
+  [X] Add module-specific configuration options
+  [X] Implement user management interface
+  [X] Add license allocation visualization
+  [X] Implement expiration settings
+
+[X] Create module configuration types
+  [X] Define interfaces for different module types
+  [X] Create base module configuration interface
+  [X] Implement type-safe module configuration access
+
+[X] Update documentation
+  [X] Update CHANGELOG.md with new features
+  [X] Update .cursorrules with progress
+
+### Next Steps
+[ ] Test the implementation
+  [ ] Verify module activation works correctly
+  [ ] Test module configuration options
+  [ ] Verify user management interface
+  [ ] Test license allocation visualization
+  [ ] Verify expiration settings
+
+## Current Task: Simplify Billing Page and Focus on Hotel Invoices
+
+### Task Description
+Remove payment method management from the billing page, update the PRD to reflect the simplified billing approach, and refocus the page on hotel invoice management.
+
+### Implementation Steps
+[X] Update billing page
+  [X] Remove payment method tab and section
+  [X] Focus on hotel invoice management
+  [X] Add filtering capabilities for hotel invoices
+  [X] Improve invoice display and organization
+
+[X] Update subscription PRD
+  [X] Remove references to payment methods
+  [X] Update billing section to focus on invoice management
+  [X] Update financial system integration section
+
+[X] Update sidebar navigation
+  [X] Rename "Billing" to "Hotel Invoices" to match content
+
+[X] Update documentation
+  [X] Update CHANGELOG.md with changes
+  [X] Update .cursorrules with learnings
+
+### Next Steps
+[ ] Test the implementation
+  [ ] Verify invoice listing and filtering works correctly
+  [ ] Test export functionality
+  [ ] Verify billing information display
+
+## Current Task: Update Subscription PRD with Text Results Display
+
+### Task Description
+Add detailed information about the subscription model structure, license validation logic, and sample reports to the PRD.
+
+### Implementation Steps
+[X] Update subscription PRD
+  [X] Add Subscription Controlling Platform - Text Results Display section
+  [X] Include Subscription Model Structure with core components
+  [X] Add License Validation Logic with detailed validation flow
+  [X] Include Sample License Report Output with business units summary
+  [X] Add Sample User Access Matrix showing access by user type
+  [X] Include Sample Module Activation Report with usage statistics
+  [X] Add System Notification Examples for license warnings and insights
+
+[X] Update documentation
+  [X] Update .cursorrules with the new task
+  [X] Update CHANGELOG.md with the PRD changes
+
+[X] Implement changes based on the new PRD
+  [X] Update User types to include BU Staff and Cluster User types
+  [X] Modify the SubscriptionLicenseManagement component to handle both user types
+  [X] Add support for module activation per business unit
+  [X] Update license utilization visualization with separate progress bars
+  [X] Update the Subscription interface to include new properties
+  [X] Update the subscription overview page to reflect the new model
+  [X] Enhance the license management dashboard with summary cards
+  [X] Add cluster information display
+  [X] Add filtering capabilities to the license management interface
+  [X] Improve warning indicators for approaching license limits
+  [X] Update the subscription plans page to align with the new model
+
+### Next Steps
+[ ] Review the updated PRD for consistency with existing content
+[ ] Ensure all tables and formatting are displayed correctly
+[ ] Consider adding visual representations of the license validation flow
+[ ] Test the implementation with different user types and module configurations
+[ ] Update the SubscriptionLicenseManagement component to handle the new filter props
 
 # Lessons
 
-- Keep documentation modular and avoid redundancy
-- Separate concerns in documentation (requirements vs structure vs flows)
-- Maintain clear boundaries between different documentation types
-
-### User Roles & Responsibilities
+## User Roles & Responsibilities
 
 #### Platform Administrator
 **Role**: Overall platform management and configuration

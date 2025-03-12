@@ -34,9 +34,10 @@ const activities = [
   },
 ]
 
-interface RecentActivityProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export function RecentActivity({ className, ...props }: RecentActivityProps) {
+export function RecentActivity({ 
+  className, 
+  ...props 
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <Card className={cn("col-span-4", className)} {...props}>
       <CardHeader>

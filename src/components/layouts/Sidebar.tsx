@@ -12,6 +12,7 @@ import {
   Settings,
   CreditCard,
   ChevronDown,
+  Building2,
 } from "lucide-react"
 import { useState } from "react"
 
@@ -31,6 +32,22 @@ const sidebarItems: SidebarItem[] = [
     title: "Dashboard",
     href: "/admin/dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Business Units",
+    href: "/admin/business-units/manage",
+    icon: Building2,
+    matchPath: "/admin/business-units",
+    children: [
+      {
+        title: "All Units",
+        href: "/admin/business-units/manage",
+      },
+      {
+        title: "Templates",
+        href: "/admin/business-units/templates",
+      }
+    ]
   },
   {
     title: "Clusters",
@@ -67,7 +84,7 @@ const sidebarItems: SidebarItem[] = [
         href: "/admin/users/clusters",
       },
       {
-        title: "Hotel Staff",
+        title: "Business Unit Staff",
         href: "/admin/users/hotels",
       },
       {
@@ -92,6 +109,10 @@ const sidebarItems: SidebarItem[] = [
     matchPath: "/admin/subscriptions",
     children: [
       {
+        title: "Subscription Management",
+        href: "/admin/subscriptions",
+      },
+      {
         title: "Plans",
         href: "/admin/subscriptions/plans",
       },
@@ -104,8 +125,12 @@ const sidebarItems: SidebarItem[] = [
         href: "/admin/subscriptions/usage",
       },
       {
-        title: "Billing",
-        href: "/admin/subscriptions/billing",
+        title: "Subscription Reports",
+        href: "/admin/subscriptions/reports",
+      },
+      {
+        title: "Hotel Invoices",
+        href: "/admin/subscriptions/invoices",
       }
     ]
   },

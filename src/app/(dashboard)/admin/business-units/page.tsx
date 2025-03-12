@@ -1,10 +1,6 @@
-import { Metadata } from "next"
-import { BusinessUnitsPage } from "@/components/business-units/BusinessUnitsPage"
+"use client"
 
-export const metadata: Metadata = {
-  title: "Business Units | Carmen Platform",
-  description: "Manage organization business units",
-}
+import { BusinessUnitsPage } from "@/components/business-units/BusinessUnitsPage"
 
 export default function Page() {
   return <BusinessUnitsPage />

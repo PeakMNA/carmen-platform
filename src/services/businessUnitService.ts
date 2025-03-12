@@ -169,3 +169,4 @@ class BusinessUnitService {
 }
 
 export const businessUnitService = new BusinessUnitService()
+export const createBusinessUnit = businessUnitService.createBusinessUnit.bind(businessUnitService)

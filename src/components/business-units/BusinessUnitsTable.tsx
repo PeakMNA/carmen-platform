@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { MoreHorizontal, Briefcase, Users } from "lucide-react"
+import { MoreHorizontal, Briefcase, Users, FolderTree } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,6 +36,7 @@ export function BusinessUnitsTable({ businessUnits }: BusinessUnitsTableProps) {
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Head</TableHead>
+              <TableHead>Cluster</TableHead>
               <TableHead>Teams</TableHead>
               <TableHead>Members</TableHead>
               <TableHead>Brand</TableHead>
@@ -55,6 +56,12 @@ export function BusinessUnitsTable({ businessUnits }: BusinessUnitsTableProps) {
                   </div>
                 </TableCell>
                 <TableCell>{unit.head}</TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <FolderTree className="h-4 w-4 text-muted-foreground" />
+                    {unit.configuration.cluster.name}
+                  </div>
+                </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-muted-foreground" />

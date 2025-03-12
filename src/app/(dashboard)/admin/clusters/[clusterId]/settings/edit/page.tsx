@@ -13,12 +13,13 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
-import { ArrowLeft, Plus, Trash2 } from "lucide-react"
+import { Plus, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { useState, useTransition, use } from "react"
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
 import { ToastAction } from "@/components/ui/toast"
+import { BackButton } from "@/components/ui/back-button"
 
 interface ClusterSettings {
   hotelGroup: {
@@ -153,7 +154,11 @@ export default function EditClusterSettingsPage({
     })
   }
 
-  const handleChange = (section: keyof ClusterSettings, field: string, value: string | boolean) => {
+  const handleChange = (
+    section: keyof ClusterSettings, 
+    field: string, 
+    value: string | boolean | object | Record<string, unknown>[]
+  ) => {
     setSettings((prev) => ({
       ...prev,
       [section]: {
@@ -166,11 +171,7 @@ export default function EditClusterSettingsPage({
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Link href={`/admin/clusters/${clusterId}`}>
-          <Button variant="ghost" size="icon">
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-        </Link>
+        <BackButton fallbackPath={`/admin/clusters/${clusterId}`} />
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Edit Cluster Settings</h2>
           <p className="text-muted-foreground">

@@ -42,7 +42,7 @@ export function ForgotPasswordForm() {
       // TODO: Implement actual password reset logic
       console.log(values)
       setSuccess(true)
-    } catch (error) {
+    } catch {
       setError("An error occurred while sending the reset link")
     } finally {
       setIsLoading(false)

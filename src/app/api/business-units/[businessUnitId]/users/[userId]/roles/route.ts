@@ -18,20 +18,16 @@ const validateSystemAuth = (req: NextRequest) => {
 // Helper to handle errors
 const handleError = (error: Error): NextResponse<ErrorResponse> => {
   console.error('Error in roles API:', error)
-  
   return NextResponse.json(
-    {
-      error: error.message,
-      code: 'ROLE_MANAGEMENT_ERROR'
-    },
-    { status: 400 }
+    { error: error.message || 'Internal Server Error', code: 'INTERNAL_ERROR' },
+    { status: 500 }
   )
 }
 
 // GET /api/business-units/[businessUnitId]/users/[userId]/roles
 export async function GET(
   request: NextRequest,
-  { params }: { params: { businessUnitId: string; userId: string } }
+  { params }: { params: Promise<{ businessUnitId: string; userId: string }> }
 ) {
   try {
     if (!validateSystemAuth(request)) {
@@ -41,7 +37,9 @@ export async function GET(
       )
     }
 
-    const roles = await userService.getUserRoles(params.businessUnitId, params.userId)
+    const { businessUnitId, userId } = await params
+    const roles = await userService.getUserRoles(businessUnitId, userId)
+    
     return NextResponse.json(roles)
   } catch (error) {
     return handleError(error as Error)
@@ -51,7 +49,7 @@ export async function GET(
 // POST /api/business-units/[businessUnitId]/users/[userId]/roles
 export async function POST(
   request: NextRequest,
-  { params }: { params: { businessUnitId: string; userId: string } }
+  { params }: { params: Promise<{ businessUnitId: string; userId: string }> }
 ) {
   try {
     if (!validateSystemAuth(request)) {
@@ -61,8 +59,10 @@ export async function POST(
       )
     }
 
-    const body = await request.json()
-    const result = await userService.addRoles(params.businessUnitId, params.userId, body)
+    const { businessUnitId, userId } = await params
+    const { roles } = await request.json()
+    
+    const result = await userService.addRoles(businessUnitId, userId, roles)
     return NextResponse.json(result)
   } catch (error) {
     return handleError(error as Error)
@@ -72,7 +72,7 @@ export async function POST(
 // DELETE /api/business-units/[businessUnitId]/users/[userId]/roles
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { businessUnitId: string; userId: string } }
+  { params }: { params: Promise<{ businessUnitId: string; userId: string }> }
 ) {
   try {
     if (!validateSystemAuth(request)) {
@@ -82,8 +82,10 @@ export async function DELETE(
       )
     }
 
-    const body = await request.json()
-    const result = await userService.removeRoles(params.businessUnitId, params.userId, body)
+    const { businessUnitId, userId } = await params
+    const { roles } = await request.json()
+    
+    const result = await userService.removeRoles(businessUnitId, userId, roles)
     return NextResponse.json(result)
   } catch (error) {
     return handleError(error as Error)
@@ -93,7 +95,7 @@ export async function DELETE(
 // PUT /api/business-units/[businessUnitId]/users/[userId]/roles
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { businessUnitId: string; userId: string } }
+  { params }: { params: Promise<{ businessUnitId: string; userId: string }> }
 ) {
   try {
     if (!validateSystemAuth(request)) {
@@ -103,8 +105,10 @@ export async function PUT(
       )
     }
 
-    const body = await request.json()
-    const result = await userService.syncRoles(params.businessUnitId, params.userId, body)
+    const { businessUnitId, userId } = await params
+    const { roles } = await request.json()
+    
+    const result = await userService.syncRoles(businessUnitId, userId, roles)
     return NextResponse.json(result)
   } catch (error) {
     return handleError(error as Error)

@@ -1,0 +1,219 @@
+# Carmen Platform Changelog
+
+## [Unreleased]
+
+### Changed
+- **Subscription Management**: Removed global module settings functionality from the business units page.
+  - Simplified the business units interface by focusing on individual business unit configuration
+  - Removed the "Global Settings" tab from the business units page
+  - Updated documentation to reflect that module configuration is only done at the individual business unit level
+  - Improved clarity of the module configuration workflow
+
+### Fixed
+- **Next.js 15 Dynamic Route Parameters**: Fixed issue with accessing `params.businessUnitId` directly in page components. In Next.js 15, dynamic route parameters are now Promises that need to be awaited before accessing their properties.
+  - Updated `EditBusinessUnitPage` component to be async and await params before accessing properties
+  - Created separate client components (`EditBusinessUnitClient`) to handle form state and UI rendering
+  - Added additional logging to help with debugging data flow
+  - Enhanced error handling for cases where mock data isn't found
+- **API Route Parameters**: Fixed type errors in API route handlers for dynamic route parameters in Next.js 15.
+  - Updated API route handlers to use the correct Promise type for params
+  - Added proper await for params in all API route handlers
+  - Fixed method names in user role management API to match service methods
+  - Improved error handling in API routes
+- **Form Data Type Handling**: Fixed type errors in form handling components.
+  - Updated handleChange function in clusters/add/page.tsx to accept both string and object values
+  - Fixed AddBusinessUnitSheet component to properly transform form data to match expected BusinessUnitFormData interface
+  - Improved type safety by using Record<string, unknown> instead of any
+- **Theme Provider**: Fixed type errors in the ThemeProvider component.
+  - Updated ThemeProvider to use direct type definitions instead of importing from next-themes/dist/types
+  - Added proper type definitions for next-themes v0.4.4
+  - Fixed attribute type to use 'class' | 'data-theme' | 'data-mode'
+- **Toast Notifications**: Fixed type error in the notifications utility.
+  - Updated the dismiss method in notifications.ts to use a proper implementation
+  - Added warning message for proper usage of toast dismiss functionality
+  - Improved documentation on how to properly dismiss toasts using useToast hook
+- **Async/Await in Client Components**: Fixed error caused by using async/await in client components, which is not supported in Next.js.
+  - Removed "use client" directive from page components that need to use async/await
+  - Properly separated server components (which can use async/await) from client components
+  - Updated documentation to clarify this limitation
+- **Sidebar Navigation**: Fixed routing issues with sidebar navigation links.
+  - Created missing route pages for all sidebar links
+  - Added query parameter support for tab-based navigation
+  - Updated sidebar item labels to match page content
+  - Renamed "Billing" to "Hotel Invoices" in sidebar navigation
+  - Updated route paths to match the new navigation structure
+  - Combined "Overview" and "License Management" into a single "Subscription Management" item
+- **Business Unit Configuration Types**: Fixed type safety issues in the Business Unit configuration page.
+  - Improved type guards for module configurations to properly check all required properties
+  - Added type guards for Analytics and PMS module configurations
+  - Enhanced module configuration interfaces for better type safety
+  - Updated module configuration handling to use proper type checking
+- **Subscription License Management**: Fixed non-functional "Manage Licenses" button in the Subscriptions page.
+  - Implemented expandable license management section for each subscription
+  - Added detailed user tables for both BU Staff and Cluster Users
+  - Provided ability to view and manage licenses directly from the subscription card
+  - Added user counts and module access visualization
+  - Improved the UX with clear expand/collapse indicators
+  - Replaced modal dialog approach with inline expandable cards for better user experience
+  - Added mock user data to demonstrate the license management functionality
+  - Added direct links to Business Unit and Cluster configuration pages
+  - Added direct editing of license limits and expiry dates
+- **User Management in Subscriptions**: Fixed non-functional "Hide Details", "Add BU Staff", and "Add Cluster User" buttons.
+  - Implemented proper toggle functionality for the "Hide Details" button
+  - Added user creation dialog for adding new BU Staff and Cluster Users
+  - Implemented module selection for new users using interactive badges
+  - Added form validation for required fields
+  - Updated user counts and license utilization when adding new users
+  - Improved empty state handling with helpful messages
+- **License Configuration Access**: Fixed issues with accessing license configuration pages.
+  - Created a comprehensive License Configuration Guide page
+  - Added direct links to all license configuration pages
+  - Provided quick access to specific business units and clusters
+  - Added step-by-step configuration instructions
+  - Integrated License Configuration into the Subscriptions section for better discoverability
+  - Improved navigation flow between subscription management and license configuration
+  - Added a "License Configuration" button to the Subscriptions page
+  - Added breadcrumb navigation to show the relationship with Subscriptions
+- **License Limits and Expiry Management**: Fixed difficulty in finding where to set user limits and license expiry.
+  - Added direct editing of license limits in the Subscriptions page
+  - Implemented a dedicated "License Limits & Expiry" section in the expanded license management view
+  - Added a modal dialog for editing BU Staff and Cluster User limits
+  - Added license expiry date editing with date picker
+  - Provided visual indicators for days remaining until expiration
+  - Implemented automatic calculation of total user limits
+- **Module License Management**: Fixed difficulty in finding where to set module licenses for business units.
+  - Added direct module management in the Subscriptions page
+  - Implemented a dedicated "Module Licenses" section in the expanded license management view
+  - Added a dialog for activating/deactivating modules for business units
+  - Provided visual representation of module distribution across user types
+  - Added module usage statistics showing BU Staff and Cluster User counts per module
+  - Improved module activation UX with interactive selection interface
+- **ESLint Errors**: Fixed various ESLint errors to ensure successful build
+  - Fixed unescaped apostrophes in text content
+  - Removed unused imports and variables
+  - Fixed empty interface declarations
+  - Improved type safety by removing explicit 'any' types
+  - Fixed variables that were assigned but only used as types
+
+### Changed
+- **Component Architecture**: Improved separation of concerns between server and client components
+  - Server components now handle route parameters and data fetching
+  - Client components handle UI rendering and state management
+  - Added proper TypeScript typing for Promise-based params
+- **Billing Page**: Simplified billing functionality to focus on invoice management
+  - Removed payment method management section
+  - Renamed "Billing" to "Hotel Invoices" in sidebar navigation
+  - Updated subscription PRD to reflect the simplified billing approach
+  - Added filtering capabilities for hotel invoices by hotel and status
+  - Improved invoice display and organization
+- **Subscription PRD**: Enhanced the subscription PRD with detailed information
+  - Added comprehensive Subscription Controlling Platform - Text Results Display section
+  - Included detailed subscription model structure with core components
+  - Added license validation logic with clear validation flow
+  - Included sample license reports, user access matrices, and module activation reports
+  - Added system notification examples for license warnings and insights
+  - Added new Module License Management section with detailed requirements
+  - Enhanced module activation interface specifications
+  - Added module distribution analytics requirements
+  - Included module configuration workflow details
+- **Subscription FSD**: Enhanced the FSD with detailed module license management information
+  - Added Module License Management interface specifications
+  - Updated Module Activation Process to reflect the new UI workflow
+  - Added Module License Distribution Tracking workflow
+  - Enhanced Business Unit Configuration Functions with module license management details
+  - Added Module License Management Interface mockup
+  - Improved module activation validation rules
+- **Subscription Page**: Simplified the subscription page to focus on subscription management
+  - Removed separate tabs for Overview and License Management
+  - Combined functionality into a single Subscription Management view
+  - Updated sidebar navigation to reflect the simplified approach
+  - Improved the user interface for better clarity and usability
+  - Removed unused code and imports for better maintainability
+  - Added direct license limits and expiry management
+- **Subscription License Management**: Updated license management to align with the new PRD
+  - Added support for BU Staff and Cluster User types
+  - Implemented separate license tracking for each user type
+  - Added module activation management per business unit
+  - Updated license validation logic to match the PRD requirements
+  - Enhanced license utilization visualization with separate progress bars for each user type
+  - Added direct editing of license limits and expiry dates
+- **Subscription Overview Page**: Enhanced the subscription overview page to reflect the new subscription model
+  - Added separate progress bars for BU Staff and Cluster Users
+  - Added module activation badges to show active modules
+  - Improved the license management dashboard with summary cards
+  - Removed direct user allocation input in favor of the license management interface
+  - Updated the page flow to better guide users through the license management process
+  - Added cluster information display to show associated clusters
+  - Enhanced warning indicators for approaching license limits
+  - Added filtering capabilities for license management by user type and module
+  - Improved module activation visualization
+  - Added license limits and expiry management section
+- **Subscription Plans Page**: Updated the subscription plans page to align with the new subscription model
+  - Restructured plan offerings to reflect the four components of the subscription formula
+  - Added clear distinction between BU Staff and Cluster Users in plan descriptions
+  - Added tooltips to explain key concepts like Cluster Users
+  - Updated pricing model to show per business unit pricing
+  - Added a Subscription Formula section explaining how pricing is calculated
+  - Updated plan descriptions to focus on hotel operations
+- **Navigation Structure**: Improved navigation for license configuration
+  - Integrated License Configuration into the Subscriptions section
+  - Created a central hub for accessing all license-related features
+  - Provided direct links to specific configuration pages
+  - Added contextual navigation between related configuration pages
+  - Improved the logical flow between subscription management and license configuration
+
+### Added
+- **Debugging**: Added enhanced logging in client components to track data flow and identify issues
+  - Added logging for mock data availability
+  - Added detailed error messages when data isn't found
+- **Documentation**: Added comprehensive documentation about Next.js 15 dynamic route parameters and async/await limitations
+  - Created guide for handling dynamic route parameters
+  - Added examples of correct and incorrect component structures
+  - Documented best practices for separating server and client components
+- **User Management**: Added user management capabilities to business unit edit page
+  - Created `BusinessUnitEditUsers` component for managing users in business units
+  - Added ability to add users to business units with specific roles
+  - Added ability to remove users from business units
+  - Added role distribution visualization
+  - Implemented filtering to prevent adding platform staff to business units
+  - Updated `userService` to support the "carmen-platform" system ID
+- **Subscription License Management**: Added license management capabilities to the subscription menu
+  - Created `SubscriptionLicenseManagement` component for managing user licenses
+  - Added tabbed interface to subscription page for license management
+  - Implemented license assignment functionality with different license types
+  - Added license utilization visualization with alerts for approaching limits
+  - Added license distribution analytics to help optimize license allocation
+  - Provided license optimization tips based on usage patterns
+- **License Configuration Guide**: Added a comprehensive guide for license configuration
+  - Created a central hub page for accessing all license configuration options
+  - Added direct links to business units, clusters, and subscription management
+  - Provided step-by-step configuration instructions
+  - Added quick access to specific business units and clusters
+  - Included contextual help and descriptions for each configuration area
+- **Documentation**: Created comprehensive subscription user flow diagrams
+  - Added detailed flowcharts for all subscription management processes
+  - Documented the complete license validation flow
+  - Created visual representations of business unit and cluster management workflows
+  - Added module license management flow diagrams
+  - Included hotel invoice management process
+
+## Business Unit Configuration
+
+- Added detailed Business Unit configuration page with module activation capabilities
+- Implemented tabbed interface for managing modules, users, and expiration settings
+- Added module-specific configuration options for Accounting, Inventory, Sales, Analytics, and PMS modules
+- Created license allocation visualization with separate progress bars for BU Staff and Cluster Users
+- Added user management interface for Business Unit staff
+- Implemented expiration settings with grace period configuration
+- Created module configuration type definitions for better type safety
+- Enhanced type guards for module configurations to ensure proper type checking
+- Added support for configuring Analytics data sources and retention periods
+- Added support for configuring PMS integration points
+
+## [0.1.0] - Initial Development
+
+### Added
+- Initial project setup with Next.js 15
+- Multi-tenant architecture foundation
+- Business unit management interface
+- Mock data for development and testing 

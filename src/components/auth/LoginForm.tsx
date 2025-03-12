@@ -44,7 +44,7 @@ export function LoginForm() {
       // TODO: Implement actual login logic
       console.log(values)
       router.push("/dashboard")
-    } catch (error) {
+    } catch {
       setError("Invalid email or password")
     } finally {
       setIsLoading(false)

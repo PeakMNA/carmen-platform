@@ -10,7 +10,6 @@ import {
   FileText,
   Settings,
   Users,
-  ArrowLeft,
   Plus,
 } from "lucide-react"
 import Link from "next/link"
@@ -18,6 +17,7 @@ import { BusinessUnitsTab } from "@/components/clusters/BusinessUnitsTab"
 import { ClusterTemplates } from "@/components/clusters/ClusterTemplates"
 import { ClusterUsers } from "@/components/clusters/ClusterUsers"
 import { SettingsTab } from "@/components/clusters/SettingsTab"
+import { BackButton } from "@/components/ui/back-button"
 
 // Mock data - replace with API call
 const clusterData = {
@@ -88,11 +88,7 @@ export default function ClusterDetailsPage({
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Link href="/admin/clusters">
-          <Button variant="ghost" size="icon">
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-        </Link>
+        <BackButton fallbackPath="/admin/clusters" />
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <h2 className="text-2xl font-bold tracking-tight">{clusterData.hotelGroup.name}</h2>

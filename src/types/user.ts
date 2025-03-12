@@ -5,6 +5,8 @@ export interface User {
   status: 'active' | 'inactive'
   lastActive: string
   platformRole?: 'admin' | 'support' | 'finance'
+  userType?: 'bu_staff' | 'cluster_user'
+  clusterId?: string
 }
 
 export interface BusinessUnitUserRole {

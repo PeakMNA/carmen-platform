@@ -22,6 +22,6 @@ export const notify = {
     })
   },
   dismiss: () => {
-    toast.dismiss()
+    console.warn("Toast dismiss should be called from a component using useToast()")
   }
 } 

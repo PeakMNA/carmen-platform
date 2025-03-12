@@ -7,7 +7,7 @@ export function DashboardHeader() {
       <div>
         <h1 className="text-2xl font-semibold">Welcome back, Admin</h1>
         <p className="text-sm text-muted-foreground">
-          Here's what's happening with your platform today.
+          Here&apos;s what&apos;s happening with your platform today.
         </p>
       </div>
       <Button>

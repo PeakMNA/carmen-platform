@@ -9,13 +9,11 @@ import { ReportTemplate } from "@/types/reports"
 interface SelectedReportsPreviewProps {
   reports: ReportTemplate[]
   onRemove: (id: string) => void
-  onConfigChange: (id: string, config: any) => void
 }
 
 export function SelectedReportsPreview({ 
   reports, 
-  onRemove,
-  onConfigChange 
+  onRemove
 }: SelectedReportsPreviewProps) {
   return (
     <Card>

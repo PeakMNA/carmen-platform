@@ -51,7 +51,7 @@ export function RegisterForm() {
       // TODO: Implement actual registration logic
       console.log(values)
       router.push("/dashboard")
-    } catch (error) {
+    } catch {
       setError("An error occurred during registration")
     } finally {
       setIsLoading(false)

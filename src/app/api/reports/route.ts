@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server"
-import { db } from "@/lib/db"
 
 export async function GET() {
   try {
@@ -19,7 +18,7 @@ export async function GET() {
     ]
 
     return NextResponse.json(reports)
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch reports" },
       { status: 500 }

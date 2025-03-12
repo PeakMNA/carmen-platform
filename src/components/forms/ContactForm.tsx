@@ -53,7 +53,7 @@ export function ContactForm({ type }: ContactFormProps) {
       // TODO: Implement actual contact logic
       console.log(values)
       setSuccess(true)
-    } catch (error) {
+    } catch {
       setError("An error occurred while sending your message")
     } finally {
       setIsLoading(false)

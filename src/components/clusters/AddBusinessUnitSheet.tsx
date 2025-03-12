@@ -84,8 +84,44 @@ export function AddBusinessUnitSheet({ clusterId, onBusinessUnitAdded }: AddBusi
     setIsLoading(true)
 
     try {
+      // Transform formData to match BusinessUnitFormData interface
+      const businessUnitData = {
+        name: formData.name,
+        brand: formData.type, // Using type as brand
+        head: formData.contact.manager,
+        location: {
+          city: formData.location.city,
+          country: formData.location.country
+        },
+        details: {
+          rooms: parseInt(formData.details.rooms) || 0,
+          teams: 0, // Default value
+          members: 0 // Default value
+        },
+        contact: {
+          email: formData.contact.email,
+          phone: formData.contact.phone,
+          address: formData.location.street
+        },
+        configuration: {
+          database: {
+            host: "localhost", // Default value
+            name: `${formData.name.toLowerCase().replace(/\s+/g, '_')}_db`,
+            type: "mysql" as const // Default value
+          }
+        },
+        settings: {
+          notifications: {
+            email: formData.notifications.email.enabled,
+            slack: formData.notifications.slack.enabled,
+            webhook: formData.notifications.webhook.enabled
+          },
+          integrations: []
+        }
+      }
+
       // Use clusterId in the API call
-      await createBusinessUnit(clusterId, formData)
+      await createBusinessUnit(clusterId, businessUnitData)
       
       toast({
         title: "Success",

@@ -42,9 +42,10 @@ const actions = [
   },
 ]
 
-interface QuickActionsProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export function QuickActions({ className, ...props }: QuickActionsProps) {
+export function QuickActions({ 
+  className, 
+  ...props 
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <Card className={cn("col-span-3", className)} {...props}>
       <CardHeader>

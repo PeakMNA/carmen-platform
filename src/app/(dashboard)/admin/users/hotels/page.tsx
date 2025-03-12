@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useCallback } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
@@ -88,7 +88,7 @@ const moduleFilterOptions = [
   ...moduleOptions
 ]
 
-export default function HotelStaffPage() {
+export default function BUStaffPage() {
   const [users, setUsers] = useState<HotelUser[]>(initialUsers)
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCluster, setSelectedCluster] = useState("all")
@@ -167,9 +167,9 @@ export default function HotelStaffPage() {
     <div className="space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Hotel Staff</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Business Unit Staff</h1>
           <p className="text-muted-foreground">
-            Manage hotel staff and department access
+            Manage business unit staff and department access
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -294,7 +294,10 @@ export default function HotelStaffPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Hotel Staff</CardTitle>
+          <CardTitle>Business Unit Staff</CardTitle>
+          <CardDescription>
+            Staff members with access to this business unit
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
@@ -302,6 +305,7 @@ export default function HotelStaffPage() {
               <TableRow>
                 <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
+                <TableHead>Cluster</TableHead>
                 <TableHead>Hotel</TableHead>
                 <TableHead>Department</TableHead>
                 <TableHead>Role</TableHead>
@@ -320,15 +324,15 @@ export default function HotelStaffPage() {
                   <TableCell className="font-medium">{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <Building2 className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm text-muted-foreground">{user.clusterName}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Building className="h-4 w-4" />
-                        {user.hotelName}
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <Building2 className="h-4 w-4 text-muted-foreground" />
+                      <span>{user.clusterName}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Building className="h-4 w-4" />
+                      {user.hotelName}
                     </div>
                   </TableCell>
                   <TableCell>

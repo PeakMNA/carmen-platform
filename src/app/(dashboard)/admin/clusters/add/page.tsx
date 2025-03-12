@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
 import { ArrowLeft, Plus, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { useState, useTransition } from "react"
@@ -151,7 +150,7 @@ export default function AddClusterPage() {
     })
   }
 
-  const handleChange = (section: keyof ClusterFormData, field: string, value: string) => {
+  const handleChange = (section: keyof ClusterFormData, field: string, value: string | Record<string, unknown>) => {
     setFormData((prev) => ({
       ...prev,
       [section]: typeof prev[section] === 'object'

@@ -19,7 +19,7 @@ interface TemplateDistributionProps {
 }
 
 export function TemplateDistribution({ template, tenants }: TemplateDistributionProps) {
-  const [selectedTenants, setSelectedTenants] = useState<string[]>([])
+  const [, setSelectedTenants] = useState<string[]>([])
 
   return (
     <Card>

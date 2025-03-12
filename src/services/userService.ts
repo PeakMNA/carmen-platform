@@ -53,7 +53,7 @@ class UserManagementService implements UserService {
       throw new Error('System ID is required')
     }
 
-    const validSystemIds = ['supply-chain-system', 'inventory-system']
+    const validSystemIds = ['supply-chain-system', 'inventory-system', 'carmen-platform']
     if (!validSystemIds.includes(systemId)) {
       throw new Error('Invalid system ID')
     }
